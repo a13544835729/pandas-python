@@ -1,0 +1,1750 @@
+<!DOCTYPE html><html><head>
+      <title>pandas</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/tarena/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.4.3/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+      
+      
+
+      
+      
+      
+      
+      
+      
+
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <h1 class="mume-header" id="pandas">Pandas</h1>
+
+<ul>
+<li><a href="#pandas">Pandas</a></li>
+<li><a href="#%E4%B8%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">&#x4E00;&#x3001;&#x6570;&#x636E;&#x7ED3;&#x6784;</a>
+<ul>
+<li><a href="#1series">1.Series</a>
+<ul>
+<li><a href="#11%E5%88%9B%E5%BB%BA">1.1&#x521B;&#x5EFA;</a>
+<ul>
+<li><a href="#%E5%88%97%E8%A1%A8%E5%88%9B%E5%BB%BA">&#x5217;&#x8868;&#x521B;&#x5EFA;</a></li>
+<li><a href="#%E5%AD%97%E5%85%B8%E5%88%9B%E5%BB%BA">&#x5B57;&#x5178;&#x521B;&#x5EFA;</a></li>
+</ul>
+</li>
+<li><a href="#12%E7%89%B9%E6%80%A7">1.2&#x7279;&#x6027;</a>
+<ul>
+<li><a href="#%E7%B4%A2%E5%BC%95">&#x7D22;&#x5F15;</a></li>
+<li><a href="#%E5%88%87%E7%89%87">&#x5207;&#x7247;</a></li>
+<li><a href="#%E9%87%8D%E6%96%B0%E7%B4%A2%E5%BC%95">&#x91CD;&#x65B0;&#x7D22;&#x5F15;</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E8%BF%90%E7%AE%97">&#x6570;&#x636E;&#x8FD0;&#x7B97;</a></li>
+<li><a href="#%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8E%92%E5%90%8D">&#x6392;&#x5E8F;&#x548C;&#x6392;&#x540D;</a></li>
+<li><a href="#%E6%B1%87%E6%80%BB%E5%92%8C%E8%AE%A1%E7%AE%97%E6%8F%8F%E8%BF%B0%E7%BB%9F%E8%AE%A1">&#x6C47;&#x603B;&#x548C;&#x8BA1;&#x7B97;&#x63CF;&#x8FF0;&#x7EDF;&#x8BA1;</a></li>
+<li><a href="#%E5%94%AF%E4%B8%80%E6%95%B0%E5%80%BC%E8%AE%A1%E6%95%B0">&#x552F;&#x4E00;&#x6570;&#x3001;&#x503C;&#x8BA1;&#x6570;</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E6%95%B0%E6%8D%AE">&#x5904;&#x7406;&#x7F3A;&#x5931;&#x6570;&#x636E;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2dataframe">2.DataFrame</a>
+<ul>
+<li><a href="#21%E5%88%9B%E5%BB%BA">2.1&#x521B;&#x5EFA;</a>
+<ul>
+<li><a href="#%E5%AD%97%E5%85%B8%E5%88%9B%E5%BB%BA-1">&#x5B57;&#x5178;&#x521B;&#x5EFA;</a></li>
+<li><a href="#%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6">&#x8BFB;&#x53D6;&#x6587;&#x4EF6;</a></li>
+</ul>
+</li>
+<li><a href="#22%E8%BD%B4%E7%9A%84%E6%A6%82%E5%BF%B5">2.2&#x8F74;&#x7684;&#x6982;&#x5FF5;</a></li>
+<li><a href="#23%E6%80%A7%E8%B4%A8">2.3&#x6027;&#x8D28;</a>
+<ul>
+<li><a href="#%E7%B4%A2%E5%BC%95%E5%88%87%E7%89%87">&#x7D22;&#x5F15;&#x3001;&#x5207;&#x7247;</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE">&#x4FEE;&#x6539;&#x6570;&#x636E;</a></li>
+<li><a href="#%E9%87%8D%E6%96%B0%E7%B4%A2%E5%BC%95-1">&#x91CD;&#x65B0;&#x7D22;&#x5F15;</a></li>
+<li><a href="#%E4%B8%A2%E5%BC%83%E6%8C%87%E5%AE%9A%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%80%BC">&#x4E22;&#x5F03;&#x6307;&#x5B9A;&#x8F74;&#x4E0A;&#x7684;&#x503C;</a></li>
+<li><a href="#%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97">&#x7B97;&#x6570;&#x8FD0;&#x7B97;</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%BA%94%E7%94%A8%E5%92%8C%E6%98%A0%E5%B0%84">&#x51FD;&#x6570;&#x7684;&#x5E94;&#x7528;&#x548C;&#x6620;&#x5C04;</a></li>
+<li><a href="#%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8E%92%E5%90%8D-1">&#x6392;&#x5E8F;&#x548C;&#x6392;&#x540D;</a></li>
+<li><a href="#%E6%B1%87%E6%80%BB%E5%92%8C%E8%AE%A1%E7%AE%97%E6%8F%8F%E8%BF%B0%E7%BB%9F%E8%AE%A1-1">&#x6C47;&#x603B;&#x548C;&#x8BA1;&#x7B97;&#x63CF;&#x8FF0;&#x7EDF;&#x8BA1;</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E6%95%B0%E6%8D%AE-1">&#x5904;&#x7406;&#x7F3A;&#x5931;&#x6570;&#x636E;</a></li>
+<li><a href="#%E5%B1%82%E6%AC%A1%E5%8C%96%E7%B4%A2%E5%BC%95">&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</a>
+<ul>
+<li><a href="#1%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE%E9%9B%86">1.&#x5408;&#x5E76;&#x6570;&#x636E;&#x96C6;</a>
+<ul>
+<li><a href="#11%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A3%8E%E6%A0%BC%E5%90%88%E5%B9%B6">1.1&#x6570;&#x636E;&#x5E93;&#x98CE;&#x683C;&#x5408;&#x5E76;</a></li>
+<li><a href="#12%E8%BD%B4%E5%90%91%E9%93%BE%E6%8E%A5">1.2&#x8F74;&#x5411;&#x94FE;&#x63A5;</a></li>
+</ul>
+</li>
+<li><a href="#2%E9%87%8D%E5%A1%91%E5%92%8C%E8%BD%B4%E5%90%91%E6%97%8B%E8%BD%AC">2.&#x91CD;&#x5851;&#x548C;&#x8F74;&#x5411;&#x65CB;&#x8F6C;</a></li>
+<li><a href="#3%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2">3.&#x6570;&#x636E;&#x8F6C;&#x6362;</a>
+<ul>
+<li><a href="#31%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E6%95%B0%E6%8D%AE">3.1&#x79FB;&#x9664;&#x91CD;&#x590D;&#x6570;&#x636E;</a></li>
+<li><a href="#32map%E5%87%BD%E6%95%B0">3.2map&#x51FD;&#x6570;</a></li>
+<li><a href="#33replace%E5%80%BC%E6%9B%BF%E6%8D%A2">3.3replace&#x503C;&#x66FF;&#x6362;</a></li>
+<li><a href="#34%E7%A6%BB%E6%95%A3%E5%8C%96%E5%92%8C%E9%9D%A2%E5%85%83%E5%88%92%E5%88%86">3.4&#x79BB;&#x6563;&#x5316;&#x548C;&#x9762;&#x5143;&#x5212;&#x5206;</a></li>
+<li><a href="#35%E6%8E%92%E5%88%97%E5%92%8C%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7">3.5&#x6392;&#x5217;&#x548C;&#x968F;&#x673A;&#x91C7;&#x6837;</a></li>
+</ul>
+</li>
+<li><a href="#4%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88">4.&#x6570;&#x636E;&#x805A;&#x5408;</a>
+<ul>
+<li><a href="#41%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84">4.1&#x6570;&#x636E;&#x5206;&#x7EC4;</a>
+<ul>
+<li><a href="#series">Series</a></li>
+<li><a href="#%E5%90%88%E9%80%82%E9%95%BF%E5%BA%A6%E7%9A%84%E6%95%B0%E7%BB%84">&#x5408;&#x9002;&#x957F;&#x5EA6;&#x7684;&#x6570;&#x7EC4;</a></li>
+<li><a href="#%E5%88%97%E5%90%8D">&#x5217;&#x540D;</a></li>
+<li><a href="#map">map</a></li>
+</ul>
+</li>
+<li><a href="#42%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C">4.2&#x6570;&#x636E;&#x805A;&#x5408;&#x64CD;&#x4F5C;</a>
+<ul>
+<li><a href="#%E7%89%B9%E5%AE%9A%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C">&#x7279;&#x5B9A;&#x805A;&#x5408;&#x64CD;&#x4F5C;</a></li>
+<li><a href="#transform%E5%87%BD%E6%95%B0">transform&#x51FD;&#x6570;</a></li>
+</ul>
+</li>
+<li><a href="#43%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8">4.3&#x6570;&#x636E;&#x900F;&#x89C6;&#x8868;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="%E4%B8%80-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">&#x4E00;&#x3001;&#x6570;&#x636E;&#x7ED3;&#x6784;</h1>
+
+<p>pandas&#x4E2D;&#x4E3B;&#x8981;&#x6709;&#x4E24;&#x79CD;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5206;&#x522B;&#x662F;&#xFF1A;Series&#x548C;DataFrame&#x3002;</p>
+<blockquote>
+<ul>
+<li>Series&#xFF1A;&#x4E00;&#x79CD;&#x7C7B;&#x4F3C;&#x4E8E;&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x662F;&#x7531;&#x4E00;&#x7EC4;&#x6570;&#x636E;(&#x5404;&#x79CD;NumPy&#x6570;&#x636E;&#x7C7B;&#x578B;)&#x4EE5;&#x53CA;&#x4E00;&#x7EC4;&#x4E0E;&#x4E4B;&#x76F8;&#x5173;&#x7684;&#x6570;&#x636E;&#x6807;&#x7B7E;(&#x5373;&#x7D22;&#x5F15;)&#x7EC4;&#x6210;&#x3002;&#x4EC5;&#x7531;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x4E5F;&#x53EF;&#x4EA7;&#x751F;&#x7B80;&#x5355;&#x7684;Series&#x5BF9;&#x8C61;&#x3002;&#x6CE8;&#x610F;&#xFF1A;Series&#x4E2D;&#x7684;&#x7D22;&#x5F15;&#x503C;&#x662F;&#x53EF;&#x4EE5;&#x91CD;&#x590D;&#x7684;&#x3002;</li>
+<li>DataFrame&#xFF1A;&#x4E00;&#x4E2A;&#x8868;&#x683C;&#x578B;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5305;&#x542B;&#x6709;&#x4E00;&#x7EC4;&#x6709;&#x5E8F;&#x7684;&#x5217;&#xFF0C;&#x6BCF;&#x5217;&#x53EF;&#x4EE5;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x503C;&#x7C7B;&#x578B;(&#x6570;&#x503C;&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x3001;&#x5E03;&#x5C14;&#x578B;&#x7B49;)&#xFF0C;DataFrame&#x5373;&#x6709;&#x884C;&#x7D22;&#x5F15;&#x4E5F;&#x6709;&#x5217;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x88AB;&#x770B;&#x505A;&#x662F;&#x7531;Series&#x7EC4;&#x6210;&#x7684;&#x5B57;&#x5178;&#x3002;</li>
+</ul>
+</blockquote>
+<h2 class="mume-header" id="1series">1.Series</h2>
+
+<h3 class="mume-header" id="11%E5%88%9B%E5%BB%BA">1.1&#x521B;&#x5EFA;</h3>
+
+<h4 class="mume-header" id="%E5%88%97%E8%A1%A8%E5%88%9B%E5%BB%BA">&#x5217;&#x8868;&#x521B;&#x5EFA;</h4>
+
+<p>pandas&#x6709;&#x4E24;&#x79CD;&#x4E3B;&#x8981;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x7B2C;&#x4E00;&#x79CD;&#x662F;Series&#xFF0C;&#x662F;&#x4E00;&#x79CD;&#x7C7B;&#x4F3C;&#x4E8E;&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5B83;&#x7531;&#x4E00;&#x7EC4;&#x6570;&#x636E;&#x4EE5;&#x53CA;&#x4E00;&#x7EC4;&#x4E0E;&#x4E4B;&#x76F8;&#x5173;&#x7684;&#x6570;&#x636E;&#x6807;&#x7B7E;&#x7EC4;&#x6210;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x6839;&#x636E;list&#x6765;&#x751F;&#x6210;&#x4E00;&#x4E2A;Series&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj = pd.Series([4,7,-5,3])
+obj
+
+#&#x8F93;&#x51FA;
+0    4
+1    7
+2   -5
+3    3
+dtype: int64
+</code></pre><p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;index&#x548C;values&#x5C5E;&#x6027;&#x6765;&#x83B7;&#x5F97;obj&#x7684;&#x7D22;&#x5F15;&#x548C;&#x503C;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj.index
+#RangeIndex(start=0, stop=4, step=1)
+obj.values
+#array([ 4,  7, -5,  3])
+
+&#x7D22;&#x5F15;&#x5728;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x662F;0-n-1&#xFF0C;&#x4E0D;&#x8FC7;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x7D22;&#x5F15;&#x7684;&#x503C;
+obj2 = pd.Series([4,7,-5,3],index=[&apos;d&apos;,&apos;b&apos;,&apos;a&apos;,&apos;c&apos;])
+obj2
+
+#&#x8F93;&#x51FA;
+d    4
+b    7
+a   -5
+c    3
+dtype: int64
+</code></pre><h4 class="mume-header" id="%E5%AD%97%E5%85%B8%E5%88%9B%E5%BB%BA">&#x5B57;&#x5178;&#x521B;&#x5EFA;</h4>
+
+<p>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x901A;&#x8FC7;&#x5B57;&#x5178;dict&#x6765;&#x521B;&#x5EFA;Series&#xFF0C;&#x6B64;&#x65F6;&#x5B57;&#x5178;&gt;&#x4E2D;&#x7684;&#x952E;&#x4F5C;&#x4E3A;&#x7D22;&#x5F15;&#xFF0C;&#x5B57;&#x5178;&#x4E2D;&#x7684;&#x503C;&#x4F5C;&#x4E3A;&#x5BF9;&#x5E94;&#x7684;&#x503C;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>sdata = {&apos;Ohio&apos;:35000,&apos;Texas&apos;:71000,&apos;Oregon&apos;:16000,&apos;Utah&apos;:5000}
+obj3 = pd.Series(sdata)
+obj3 
+#&#x8F93;&#x51FA;
+Ohio      35000
+Oregon    16000
+Texas     71000
+Utah       5000
+dtype: int64
+</code></pre><p>&#x5982;&#x679C;&#x65E2;&#x4F7F;&#x7528;&#x4E86;&#x5B57;&#x5178;&#xFF0C;&#x53C8;&#x6307;&#x5B9A;&#x4E86;&#x7D22;&#x5F15;&#xFF0C;&#x90A3;&#x4E48;&#x5B57;&#x5178;&#x4E2D;&#x8DDF;&#x7D22;&#x5F15;&#x76F8;&#x5339;&#x914D;&#x7684;&#x503C;&#x5C06;&#x4F1A;&#x88AB;&#x627E;&#x51FA;&#x6765;&#x653E;&#x5230;&#x76F8;&#x5E94;&#x7684;&#x4F4D;&#x7F6E;&#x4E0A;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>states = [&apos;California&apos;,&apos;Ohio&apos;,&apos;Texas&apos;,&apos;Oregon&apos;]
+obj4 = pd.Series(sdata,index = states)
+obj4
+#&#x8F93;&#x51FA;
+California        NaN
+Ohio          35000.0
+Texas         71000.0
+Oregon        16000.0
+dtype: float64
+</code></pre><h3 class="mume-header" id="12%E7%89%B9%E6%80%A7">1.2&#x7279;&#x6027;</h3>
+
+<h4 class="mume-header" id="%E7%B4%A2%E5%BC%95">&#x7D22;&#x5F15;</h4>
+
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;&#x7684;&#x4E0B;&#x6807;&#x6216;&#x8005;index&#x6765;&#x8BBF;&#x95EE;Series&#x4E2D;&#x7684;&#x5143;&#x7D20;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj2[2]
+#-5
+
+obj2[&apos;a&apos;]
+#-5
+
+obj2[\[&apos;a&apos;,&apos;b&apos;,&apos;d&apos;]]
+#&#x8F93;&#x51FA;
+a   -5
+b    7
+d    4
+dtype: int64
+</code></pre><h4 class="mume-header" id="%E5%88%87%E7%89%87">&#x5207;&#x7247;</h4>
+
+<p>&#x4E0E;&#x5229;&#x7528;&#x4E0B;&#x6807;&#x8FDB;&#x884C;&#x5207;&#x7247;&#x4E0D;&#x540C;&#xFF0C;&#x4F7F;&#x7528;&#x6807;&#x7B7E;&#x8FDB;&#x884C;&#x5207;&#x7247;&#x65F6;&#xFF0C;&#x672B;&#x7AEF;&#x662F;&#x5305;&#x542B;&#x7684;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj[&apos;b&apos;:&apos;c&apos;]
+#&#x8F93;&#x51FA;
+b    1.0
+c    2.0
+dtype: float64
+</code></pre><h4 class="mume-header" id="%E9%87%8D%E6%96%B0%E7%B4%A2%E5%BC%95">&#x91CD;&#x65B0;&#x7D22;&#x5F15;</h4>
+
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;reindex&#x51FD;&#x6570;&#x5BF9;Series&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x7D22;&#x5F15;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7B80;&#x5355;&#x7684;&#x6539;&#x53D8;&#x7D22;&#x5F15;&#x7684;&#x503C;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj2 = pd.Series([4,7,-5,3],index=[&apos;d&apos;,&apos;b&apos;,&apos;a&apos;,&apos;c&apos;])
+obj3 = obj2.reindex([&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;])
+obj3
+#&#x8F93;&#x51FA;
+a   -5.0
+b    7.0
+c    3.0
+d    4.0
+e    NaN
+dtype: float64
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x4F7F;&#x7528;reindex&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x65B0;&#x589E; &#x7684;&#x7D22;&#x5F15;&#x5728;&#x539F;&#x6570;&#x636E;&#x4E2D;&#x6CA1;&#x6709;&#x503C;&#xFF0C;&#x5176;&#x5BF9;&#x5E94;&#x7684;&#x503C;&#x5C31;&#x4F1A;&#x662F;NA&#xFF0C;&#x6B64;&#x65F6;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;fill_value&#x5C5E;&#x6027;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x586B;&#x5145;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj4 = obj2.reindex([&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;],fill_value=0)
+obj4
+#&#x8F93;&#x51FA;
+a   -5
+b    7
+c    3
+d    4
+e    0
+dtype: int64
+</code></pre><p>reindex&#x51FD;&#x6570;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;method&#x5C5E;&#x6027;&#xFF0C;&#x8FDB;&#x884C;&#x5DEE;&#x503C;&#x586B;&#x5145;&#xFF0C;&#x4F46;&#x662F;&#x7D22;&#x5F15;&#x5FC5;&#x987B;&#x662F;&#x5355;&#x8C03;&#x9012;&#x589E;&#x6216;&#x8005;&#x5355;&#x8C03;&#x9012;&#x51CF;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x4E00;&#x822C;&#x7528;&#x5728;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x8FD9;&#x6837;&#x7684;&#x6709;&#x5E8F;&#x6570;&#x636E;&#x4E2D;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code># obj5 = obj2.reindex([&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;],method=&apos;ffill&apos;) &#x4F1A;&#x62A5;&#x9519;
+obj3 = pd.Series([&apos;blue&apos;,&apos;Purple&apos;,&apos;yellow&apos;],index = [0,2,4])
+obj3.reindex(range(6),method=&apos;ffill&apos;)
+#&#x8F93;&#x51FA;
+0      blue
+1      blue
+2    Purple
+3    Purple
+4    yellow
+5    yellow
+dtype: object
+</code></pre><h4 class="mume-header" id="%E6%95%B0%E6%8D%AE%E8%BF%90%E7%AE%97">&#x6570;&#x636E;&#x8FD0;&#x7B97;</h4>
+
+<p>&#x53EF;&#x4EE5;&#x5BF9;Series&#x8FDB;&#x884C;numpy&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x6570;&#x7EC4;&#x8FD0;&#x7B97;&#xFF08;&#x5982;&#x6839;&#x636E;&#x5E03;&#x5C14;&#x578B;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x8FC7;&#x6EE4;&#xFF0C;&#x6807;&#x91CF;&#x4E58;&#x6CD5;&#x3001;&#x5E94;&#x7528;&#x6570;&#x5B66;&#x51FD;&#x6570;&#x7B49;&#xFF09;&#xFF0C;&#x8FD9;&#x4E9B;&#x90FD;&#x4F1A;&#x4FDD;&#x7559;&#x7D22;&#x5F15;&#x548C;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x94FE;&#x63A5;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>np.exp(obj2)
+#&#x8F93;&#x51FA;
+d      54.598150
+b    1096.633158
+a       0.006738
+c      20.085537
+dtype: float64
+</code></pre><p>&#x53EF;&#x4EE5;&#x628A;Series&#x770B;&#x6210;&#x662F;&#x4E00;&#x4E2A;&#x5B9A;&#x957F;&#x7684;&#x6709;&#x5E8F;&#x5B57;&#x5178;&#xFF0C;&#x56E0;&#x4E3A;&#x4ED6;&#x662F;&#x7D22;&#x5F15;&#x503C;&#x5230;&#x6570;&#x636E;&#x503C;&#x7684;&#x4E00;&#x4E2A;&#x6620;&#x5C04;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x7528;&#x5728;&#x8BB8;&#x591A;&#x539F;&#x672C;&#x9700;&#x8981;&#x5B57;&#x5178;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#x4E2D;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>b&apos; in obj2
+#True
+</code></pre><p>Series&#x6700;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x4E2A;&#x529F;&#x80FD;&#x662F;&#xFF1A;&#x5B83;&#x5728;&#x7B97;&#x672F;&#x8FD0;&#x7B97;&#x4E2D;&#x4F1A;&#x81EA;&#x52A8;&#x5BF9;&#x9F50;&#x4E0D;&#x540C;&#x7D22;&#x5F15;&#x7684;&#x6570;&#x636E;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj3 + obj4
+#&#x8F93;&#x51FA;
+California         NaN
+Ohio           70000.0
+Oregon         32000.0
+Texas         142000.0
+Utah               NaN
+dtype: float64
+</code></pre><h4 class="mume-header" id="%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8E%92%E5%90%8D">&#x6392;&#x5E8F;&#x548C;&#x6392;&#x540D;</h4>
+
+<p>sort_index&#x6309;&#x7167;&#x7D22;&#x5F15;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5BF9;&#x8C61;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj = pd.Series(range(4),index=[&apos;d&apos;,&apos;a&apos;,&apos;b&apos;,&apos;c&apos;])
+obj.sort_index()
+#&#x8F93;&#x51FA;&#xFF1A;
+a    1
+b    2
+c    3
+d    0
+dtype: int64
+</code></pre><p>sort_values&#x6839;&#x636E;&#x5217;&#x503C;&#x8FDB;&#x884C;&#x6392;&#x5E8F;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj.sort_values()
+#&#x8F93;&#x51FA;&#xFF1A;
+d    0
+a    1
+b    2
+c    3
+dtype: int64
+</code></pre><p>&#x4F7F;&#x7528;rank&#x51FD;&#x6570;&#x4F1A;&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x6392;&#x540D;&#x503C;&#xFF0C;&#x4ECE;1&#x5F00;&#x59CB;&#xFF0C;&#x4E00;&#x76F4;&#x5230;&#x6570;&#x7EC4;&#x4E2D;&#x6709;&#x6548;&#x6570;&#x636E;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x5BF9;&#x4E8E;&#x5E73;&#x7EA7;&#x5173;&#x7CFB;&#xFF0C;rank&#x662F;&#x901A;&#x8FC7;&#x4E3A;&#x5404;&#x7EC4;&#x5206;&#x914D;&#x4E00;&#x4E2A;&#x5E73;&#x5747;&#x6392;&#x540D;&#x7684;&#x65B9;&#x5F0F;&#x7834;&#x574F;&#x5E73;&#x7EA7;&#x5173;&#x7CFB;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x60F3;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x5E73;&#x5747;&#x503C;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;method&#x53C2;&#x6570;&#x6309;&#x7167;&#x6307;&#x5B9A;&#x7684;&#x65B9;&#x5F0F;&#x8FDB;&#x884C;rank&#x6392;&#x5E8F;&#xFF0C;&#x4F8B;&#x5982;&#x4F7F;&#x7528;first&#x53EF;&#x4EE5;&#x6309;&#x503C;&#x5728;&#x539F;&#x59CB;&#x6570;&#x636E;&#x4E2D;&#x51FA;&#x73B0;&#x987A;&#x5E8F;&#x5206;&#x914D;&#x6392;&#x540D;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj = pd.Series([7,-5,7,4,2,0,4])
+obj.rank()
+#&#x8F93;&#x51FA;&#xFF1A;
+0    6.5
+1    1.0
+2    6.5
+3    4.5
+4    3.0
+5    2.0
+6    4.5
+dtype: float64
+
+obj.rank(method=&apos;first&apos;)
+#&#x8F93;&#x51FA;
+0    6.0
+1    1.0
+2    7.0
+3    4.0
+4    3.0
+5    2.0
+6    5.0
+dtype: float64
+</code></pre><h4 class="mume-header" id="%E6%B1%87%E6%80%BB%E5%92%8C%E8%AE%A1%E7%AE%97%E6%8F%8F%E8%BF%B0%E7%BB%9F%E8%AE%A1">&#x6C47;&#x603B;&#x548C;&#x8BA1;&#x7B97;&#x63CF;&#x8FF0;&#x7EDF;&#x8BA1;</h4>
+
+<p>Series&#x4E2D;&#x7684;&#x5B9E;&#x73B0;&#x4E86;sum&#x3001;mean&#x3001;max&#x7B49;&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x4E86;&#xFF0C;&#x6211;&#x4EEC;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;&#x6C42;&#x534F;&#x65B9;&#x5DEE;&#x548C;&#x76F8;&#x5173;&#x7CFB;&#x6570;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;Series&#x7684;corr&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x4E24;&#x4E2A;Series&#x4E2D;&#x91CD;&#x53E0;&#x7684;&#xFF0C;&#x975E;NA&#x7684;&#xFF0C;&#x6309;&#x7D22;&#x5F15;&#x5BF9;&#x9F50;&#x7684;&#x503C;&#x7684;&#x76F8;&#x5173;&#x7CFB;&#x6570;&#xFF0C;&#x4E0E;&#x6B64;&#x7C7B;&#x4F3C;&#xFF0C;cov&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x534F;&#x65B9;&#x5DEE;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj1 = pd.Series(np.arange(10),index = list(&apos;abcdefghij&apos;))
+obj2 = pd.Series(np.arange(12),index = list(&apos;cdefghijklmn&apos;))
+obj1.corr(obj2)
+#1.0
+obj1.cov(obj2)
+#6.0
+</code></pre><h4 class="mume-header" id="%E5%94%AF%E4%B8%80%E6%95%B0-%E5%80%BC%E8%AE%A1%E6%95%B0">&#x552F;&#x4E00;&#x6570;&#x3001;&#x503C;&#x8BA1;&#x6570;</h4>
+
+<p>unique&#x8FD4;&#x56DE;&#x6CA1;&#x6709;&#x6392;&#x5E8F;&#x7684;&#x552F;&#x4E00;&#x503C;&#x6570;&#x7EC4;,value_counts()&#x8FD4;&#x56DE;&#x5404;&#x6570;&#x7684;&#x8BA1;&#x6570;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>obj = pd.Series([&apos;c&apos;,&apos;a&apos;,&apos;d&apos;,&apos;a&apos;,&apos;a&apos;,&apos;b&apos;,&apos;b&apos;,&apos;c&apos;,&apos;c&apos;])
+uniques = obj.unique()
+uniques
+#array([&apos;c&apos;, &apos;a&apos;, &apos;d&apos;, &apos;b&apos;], dtype=object)
+
+#value_counts()&#x8FD4;&#x56DE;&#x5404;&#x6570;&#x7684;&#x8BA1;&#x6570;
+obj.value_counts()
+#&#x8F93;&#x51FA;
+a    3
+c    3
+b    2
+d    1
+dtype: int64
+</code></pre><h4 class="mume-header" id="%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E6%95%B0%E6%8D%AE">&#x5904;&#x7406;&#x7F3A;&#x5931;&#x6570;&#x636E;</h4>
+
+<p>Pandas&#x4E2D;&#x7F3A;&#x5931;&#x503C;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;&#x4E3B;&#x8981;&#x6709;&#x4EE5;&#x4E0B;&#x4E09;&#x4E2A;&#xFF1A;<br>
+isnull&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x5224;&#x65AD;&#x6570;&#x636E;&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#x6570;&#x636E;&#xFF1B;<br>
+fillna&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x586B;&#x8865;&#x7F3A;&#x5931;&#x6570;&#x636E;&#xFF1B;<br>
+dropna&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x820D;&#x5F03;&#x7F3A;&#x5931;&#x6570;&#x636E;&#x3002;<br>
+&#x4E0A;&#x9762;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Series&#x6216;&#x8005;DataFrame&#xFF0C;&#x5BF9;&#x539F;&#x6570;&#x636E;&#x6CA1;&#x6709;&#x5F71;&#x54CD;,&#x5982;&#x679C;&#x60F3;&#x5728;&#x539F;&#x6570;&#x636E;&#x4E0A;&#x8FDB;&#x884C;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#xFF0C;&#x4F7F;&#x7528;inplace&#x53C2;&#x6570;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = pd.Series([1,np.nan,3.5,np.nan,7])
+data.fillna(0)
+#&#x8F93;&#x51FA;
+0    1.0
+1    0.0
+2    3.5
+3    0.0
+4    7.0
+dtype: float64
+</code></pre><h2 class="mume-header" id="2dataframe">2.DataFrame</h2>
+
+<p>DataFrame&#x662F;&#x4E00;&#x79CD;&#x8868;&#x683C;&#x578B;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5B83;&#x542B;&#x6709;&#x4E00;&#x7EC4;&#x6709;&#x5E8F;&#x7684;&#x5217;&#xFF0C;&#x6BCF;&#x5217;&#x53EF;&#x4EE5;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x503C;&#x3002;DataFrame&#x65E2;&#x6709;&#x884C;&#x7D22;&#x5F15;&#xFF0C;&#x4E5F;&#x6709;&#x5217;&#x7D22;&#x5F15;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x770B;&#x4F5C;&#x662F;&#x7531;Series&#x7EC4;&#x6210;&#x7684;&#x5B57;&#x5178;&#xFF0C;&#x4E0D;&#x8FC7;&#x8FD9;&#x4E9B;Series&#x516C;&#x7528;&#x4E00;&#x4E2A;&#x7D22;&#x5F15;&#x3002;<br>
+DataFrame&#x7684;&#x521B;&#x5EFA;&#x6709;&#x591A;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x4E0D;&#x8FC7;&#x6700;&#x91CD;&#x8981;&#x7684;&#x8FD8;&#x662F;&#x6839;&#x636E;dict&#x8FDB;&#x884C;&#x521B;&#x5EFA;&#xFF0C;&#x4EE5;&#x53CA;&#x8BFB;&#x53D6;csv&#x6216;&#x8005;txt&#x6587;&#x4EF6;&#x6765;&#x521B;&#x5EFA;&#x3002;&#x8FD9;&#x91CC;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;&#x8FD9;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x3002;</p>
+<h3 class="mume-header" id="21%E5%88%9B%E5%BB%BA">2.1&#x521B;&#x5EFA;</h3>
+
+<h4 class="mume-header" id="%E5%AD%97%E5%85%B8%E5%88%9B%E5%BB%BA-1">&#x5B57;&#x5178;&#x521B;&#x5EFA;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>data = {
+    &apos;state&apos;:[&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Nevada&apos;,&apos;Nevada&apos;],
+    &apos;year&apos;:[2000,2001,2002,2001,2002],
+    &apos;pop&apos;:[1.5,1.7,3.6,2.4,2.9]
+}
+frame = pd.DataFrame(data)
+frame
+
+#&#x8F93;&#x51FA;
+    pop state   year
+0   1.5 Ohio    2000
+1   1.7 Ohio    2001
+2   3.6 Ohio    2002
+3   2.4 Nevada  2001
+4   2.9 Nevada  2002
+</code></pre><p>DataFrame&#x7684;&#x884C;&#x7D22;&#x5F15;&#x662F;index&#xFF0C;&#x5217;&#x7D22;&#x5F15;&#x662F;columns&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x521B;&#x5EFA;DataFrame&#x65F6;&#x6307;&#x5B9A;&#x7D22;&#x5F15;&#x7684;&#x503C;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame2 = pd.DataFrame(data,index=[&apos;one&apos;,&apos;two&apos;,&apos;three&apos;,&apos;four&apos;,&apos;five&apos;],columns=[&apos;year&apos;,&apos;state&apos;,&apos;pop&apos;,&apos;debt&apos;])
+frame2
+
+#&#x8F93;&#x51FA;
+    year    state   pop debt
+one 2000    Ohio    1.5 NaN
+two 2001    Ohio    1.7 NaN
+three   2002    Ohio    3.6 NaN
+four    2001    Nevada  2.4 NaN
+five    2002    Nevada  2.9 NaN
+</code></pre><p>&#x4F7F;&#x7528;&#x5D4C;&#x5957;&#x5B57;&#x5178;&#x4E5F;&#x53EF;&#x4EE5;&#x521B;&#x5EFA;DataFrame&#xFF0C;&#x6B64;&#x65F6;&#x5916;&#x5C42;&#x5B57;&#x5178;&#x7684;&#x952E;&#x4F5C;&#x4E3A;&#x5217;&#xFF0C;&#x5185;&#x5C42;&#x952E;&#x5219;&#x4F5C;&#x4E3A;&#x7D22;&#x5F15;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>pop = {&apos;Nevada&apos;:{2001:2.4,2002:2.9},&apos;Ohio&apos;:{2000:1.5,2001:1.7,2002:3.6}}
+frame3 = pd.DataFrame(pop)
+frame3
+#&#x8F93;&#x51FA;
+    Nevada  Ohio
+2000    NaN 1.5
+2001    2.4 1.7
+2002    2.9 3.6
+</code></pre><p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;index&#xFF0C;columns&#xFF0C;values&#x6765;&#x8BBF;&#x95EE;DataFrame&#x7684;&#x884C;&#x7D22;&#x5F15;&#xFF0C;&#x5217;&#x7D22;&#x5F15;&#x4EE5;&#x53CA;&#x6570;&#x636E;&#x503C;&#xFF0C;&#x6570;&#x636E;&#x503C;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x4E8C;&#x7EF4;&#x7684;ndarray</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame2.values
+#&#x8F93;&#x51FA;
+array([[2000, &apos;Ohio&apos;, 1.5, 0],
+       [2001, &apos;Ohio&apos;, 1.7, 1],
+       [2002, &apos;Ohio&apos;, 3.6, 2],
+       [2001, &apos;Nevada&apos;, 2.4, 3],
+       [2002, &apos;Nevada&apos;, 2.9, 4]], dtype=object)
+</code></pre><h4 class="mume-header" id="%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6">&#x8BFB;&#x53D6;&#x6587;&#x4EF6;</h4>
+
+<p>&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x751F;&#x6210;DataFrame&#x6700;&#x5E38;&#x7528;&#x7684;&#x662F;read_csv,read_table&#x65B9;&#x6CD5;&#x3002;&#x8BE5;&#x65B9;&#x6CD5;&#x4E2D;&#x51E0;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x53C2;&#x6570;&#x5982;&#x4E0B;&#x6240;&#x793A;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x53C2;&#x6570;</th>
+<th>&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>header</td>
+<td>&#x9ED8;&#x8BA4;&#x7B2C;&#x4E00;&#x884C;&#x4E3A;columns&#xFF0C;&#x5982;&#x679C;&#x6307;&#x5B9A;header=None&#xFF0C;&#x5219;&#x8868;&#x660E;&#x6CA1;&#x6709;&#x7D22;&#x5F15;&#x884C;&#xFF0C;&#x7B2C;&#x4E00;&#x884C;&#x5C31;&#x662F;&#x6570;&#x636E;</td>
+</tr>
+<tr>
+<td>index_col</td>
+<td>&#x9ED8;&#x8BA4;&#x4F5C;&#x4E3A;&#x7D22;&#x5F15;&#x7684;&#x4E3A;&#x7B2C;&#x4E00;&#x5217;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBE;&#x4E3A;index_col&#x4E3A;-1&#xFF0C;&#x8868;&#x660E;&#x6CA1;&#x6709;&#x7D22;&#x5F15;&#x5217;</td>
+</tr>
+<tr>
+<td>nrows</td>
+<td>&#x8868;&#x660E;&#x8BFB;&#x53D6;&#x7684;&#x884C;&#x6570;</td>
+</tr>
+<tr>
+<td>sep&#x6216;delimiter</td>
+<td>&#x5206;&#x9694;&#x7B26;&#xFF0C;read_csv&#x9ED8;&#x8BA4;&#x662F;&#x9017;&#x53F7;&#xFF0C;&#x800C;read_table&#x9ED8;&#x8BA4;&#x662F;&#x5236;&#x8868;&#x7B26;\t</td>
+</tr>
+<tr>
+<td>encoding</td>
+<td>&#x7F16;&#x7801;&#x683C;&#x5F0F;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5176;&#x4ED6;&#x521B;&#x5EFA;DataFrame&#x7684;&#x65B9;&#x5F0F;&#x6709;&#x5F88;&#x591A;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BFB;&#x53D6;mysql&#x6216;&#x8005;mongoDB&#x6765;&#x751F;&#x6210;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x8BFB;&#x53D6;json&#x6587;&#x4EF6;&#x7B49;&#x7B49;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x4E0D;&#x518D;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h3 class="mume-header" id="22%E8%BD%B4%E7%9A%84%E6%A6%82%E5%BF%B5">2.2&#x8F74;&#x7684;&#x6982;&#x5FF5;</h3>
+
+<p>&#x5728;DataFrame&#x7684;&#x5904;&#x7406;&#x4E2D;&#x7ECF;&#x5E38;&#x4F1A;&#x9047;&#x5230;&#x8F74;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x8FD9;&#x91CC;&#x5148;&#x7ED9;&#x5927;&#x5BB6;&#x4E00;&#x4E2A;&#x76F4;&#x89C2;&#x7684;&#x5370;&#x8C61;&#xFF0C;&#x6211;&#x4EEC;&#x6240;&#x8BF4;&#x7684;axis=0&#x5373;&#x8868;&#x793A;&#x6CBF;&#x7740;&#x6BCF;&#x4E00;&#x5217;&#x6216;&#x884C;&#x6807;&#x7B7E;\&#x7D22;&#x5F15;&#x503C;&#x5411;&#x4E0B;&#x6267;&#x884C;&#x65B9;&#x6CD5;&#xFF0C;axis=1&#x5373;&#x8868;&#x793A;&#x6CBF;&#x7740;&#x6BCF;&#x4E00;&#x884C;&#x6216;&#x8005;&#x5217;&#x6807;&#x7B7E;&#x6A21;&#x5411;&#x6267;&#x884C;&#x5BF9;&#x5E94;&#x7684;&#x65B9;&#x6CD5;&#x3002;<br>
+<img src="zhou.png" alt="avatar"></p>
+<h3 class="mume-header" id="23%E6%80%A7%E8%B4%A8">2.3&#x6027;&#x8D28;</h3>
+
+<h4 class="mume-header" id="%E7%B4%A2%E5%BC%95-%E5%88%87%E7%89%87">&#x7D22;&#x5F15;&#x3001;&#x5207;&#x7247;</h4>
+
+<p>&#x7D22;&#x5F15;&#x3001;&#x5207;&#x7247;<br>
+&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x5217;&#x540D;&#x6765;&#x9009;&#x53D6;&#x4E00;&#x5217;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;Series:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame2[&apos;year&apos;]
+#&#x8F93;&#x51FA;
+one      2000
+two      2001
+three    2002
+four     2001
+five     2002
+Name: year, dtype: int64
+</code></pre><p>&#x9009;&#x53D6;&#x591A;&#x5217;&#x6216;&#x8005;&#x591A;&#x884C;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = pd.DataFrame(np.arange(16).reshape((4,4)),
+index = [&apos;Ohio&apos;,&apos;Colorado&apos;,&apos;Utah&apos;,&apos;New York&apos;],
+columns=[&apos;one&apos;,&apos;two&apos;,&apos;three&apos;,&apos;four&apos;])
+data[[&apos;two&apos;,&apos;three&apos;]]
+#&#x8F93;&#x51FA;
+    two three
+Ohio    1   2
+Colorado    5   6
+Utah    9   10
+New York    13  14
+
+#&#x53D6;&#x884C;
+data[:2]
+#&#x8F93;&#x51FA;
+    one two three   four
+Ohio    0   1   2   3
+Colorado    4   5   6   7
+</code></pre><p>&#x6839;&#x636E;&#x903B;&#x8F91;&#x6761;&#x4EF6;&#x6765;&#x9009;&#x53D6;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data[data[&apos;three&apos;]&gt;5]
+#&#x8F93;&#x51FA;
+    one two three   four
+Colorado    4   5   6   7
+Utah    8   9   10  11
+New York    12  13  14  15
+</code></pre><p>pandas&#x63D0;&#x4F9B;&#x4E86;&#x4E13;&#x95E8;&#x7684;&#x7528;&#x4E8E;&#x7D22;&#x5F15;DataFrame&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x5373;&#x4F7F;&#x7528;ix&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x7D22;&#x5F15;,&#x4E0D;&#x8FC7;ix&#x5728;&#x6700;&#x65B0;&#x7684;&#x7248;&#x672C;&#x4E2D;&#x5DF2;&#x7ECF;&#x88AB;&#x5E9F;&#x5F03;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x8981;&#x662F;&#x7528;&#x6807;&#x7B7E;&#xFF0C;&#x6700;&#x597D;&#x4F7F;&#x7528;loc&#x65B9;&#x6CD5;&#xFF0C;&#x5982;&#x679C;&#x4F7F;&#x7528;&#x4E0B;&#x6807;&#xFF0C;&#x6700;&#x597D;&#x4F7F;&#x7528;iloc&#x65B9;&#x6CD5;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>#data.ix[&apos;Colorado&apos;,[&apos;two&apos;,&apos;three&apos;]]
+data.loc[&apos;Colorado&apos;,[&apos;two&apos;,&apos;three&apos;]]
+#&#x8F93;&#x51FA;
+two      5
+three    6
+Name: Colorado, dtype: int64
+
+data.iloc[0:3,2]
+#&#x8F93;&#x51FA;
+Ohio         2
+Colorado     6
+Utah        10
+Name: three, dtype: int64
+</code></pre><h4 class="mume-header" id="%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE">&#x4FEE;&#x6539;&#x6570;&#x636E;</h4>
+
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x6807;&#x91CF;&#x4FEE;&#x6539;DataFrame&#x4E2D;&#x7684;&#x67D0;&#x4E00;&#x5217;&#xFF0C;&#x6B64;&#x65F6;&#x8FD9;&#x4E2A;&#x6807;&#x91CF;&#x4F1A;&#x5E7F;&#x64AD;&#x5230;DataFrame&#x7684;&#x6BCF;&#x4E00;&#x884C;&#x4E0A;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = {
+    &apos;state&apos;:[&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Nevada&apos;,&apos;Nevada&apos;],
+    &apos;year&apos;:[2000,2001,2002,2001,2002],
+    &apos;pop&apos;:[1.5,1.7,3.6,2.4,2.9]
+}
+frame2 = pd.DataFrame(data,index=[&apos;one&apos;,&apos;two&apos;,&apos;three&apos;,&apos;four&apos;,&apos;five&apos;],columns=[&apos;year&apos;,&apos;state&apos;,&apos;pop&apos;,&apos;debt&apos;])
+frame2
+frame2[&apos;debt&apos;]=16.5
+frame2
+#&#x8F93;&#x51FA;
+year    state   pop debt
+one 2000    Ohio    1.5 16.5
+two 2001    Ohio    1.7 16.5
+three   2002    Ohio    3.6 16.5
+four    2001    Nevada  2.4 16.5
+five    2002    Nevada  2.9 16.5
+</code></pre><p>&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x6765;&#x4FEE;&#x6539;&#xFF0C;&#x4E0D;&#x8FC7;&#x8981;&#x4FDD;&#x8BC1;&#x5217;&#x8868;&#x7684;&#x957F;&#x5EA6;&#x4E0E;DataFrame&#x957F;&#x5EA6;&#x76F8;&#x540C;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame2.debt = np.arange(5)
+frame2
+#&#x8F93;&#x51FA;
+    year    state   pop debt
+one 2000    Ohio    1.5 0
+two 2001    Ohio    1.7 1
+three   2002    Ohio    3.6 2
+four    2001    Nevada  2.4 3
+five    2002    Nevada  2.9 4
+</code></pre><p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;Series&#xFF0C;&#x6B64;&#x65F6;&#x4F1A;&#x6839;&#x636E;&#x7D22;&#x5F15;&#x8FDB;&#x884C;&#x7CBE;&#x786E;&#x5339;&#x914D;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>val = pd.Series([-1.2,-1.5,-1.7],index=[&apos;two&apos;,&apos;four&apos;,&apos;five&apos;])
+frame2[&apos;debt&apos;] = val
+frame2
+#&#x8F93;&#x51FA;
+    year    state   pop debt
+one 2000    Ohio    1.5 NaN
+two 2001    Ohio    1.7 -1.2
+three   2002    Ohio    3.6 NaN
+four    2001    Nevada  2.4 -1.5
+five    2002    Nevada  2.9 -1.7
+</code></pre><h4 class="mume-header" id="%E9%87%8D%E6%96%B0%E7%B4%A2%E5%BC%95-1">&#x91CD;&#x65B0;&#x7D22;&#x5F15;</h4>
+
+<p>&#x4F7F;&#x7528;reindex&#x65B9;&#x6CD5;&#x5BF9;DataFrame&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x7D22;&#x5F15;&#x3002;&#x5BF9;DataFrame&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x7D22;&#x5F15;&#xFF0C;&#x53EF;&#x4EE5;&#x91CD;&#x65B0;&#x7D22;&#x5F15;&#x884C;&#xFF0C;&#x5217;&#x6216;&#x8005;&#x4E24;&#x4E2A;&#x90FD;&#x4FEE;&#x6539;&#xFF0C;&#x5982;&#x679C;&#x53EA;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5219;&#x4F1A;&#x4ECE;&#x65B0;&#x7D22;&#x5F15;&#x884C;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame = pd.DataFrame(np.arange(9).reshape((3,3)),index=[1,4,5],columns=[&apos;Ohio&apos;,&apos;Texas&apos;,&apos;California&apos;])
+frame2 = frame.reindex([1,2,4,5])
+frame2
+#&#x8F93;&#x51FA;
+    Ohio    Texas   California
+1   0.0 1.0 2.0
+2   NaN NaN NaN
+4   3.0 4.0 5.0
+5   6.0 7.0 8.0
+
+states = [&apos;Texas&apos;,&apos;Utah&apos;,&apos;California&apos;]
+frame.reindex(columns=states)
+#&#x8F93;&#x51FA;
+    Texas   Utah    California
+1   1   NaN 2
+4   4   NaN 5
+5   7   NaN 8
+</code></pre><p>&#x586B;&#x5145;&#x6570;&#x636E;&#x53EA;&#x80FD;&#x6309;&#x884C;&#x586B;&#x5145;&#xFF0C;&#x6B64;&#x65F6;&#x53EA;&#x80FD;&#x5BF9;&#x884C;&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x7D22;&#x5F15;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame = pd.DataFrame(np.arange(9).reshape((3,3)),index = [&apos;a&apos;,&apos;c&apos;,&apos;d&apos;],columns = [&apos;Ohio&apos;,&apos;Texas&apos;,&apos;California&apos;])
+frame.reindex([&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;],method = &apos;bfill&apos;)
+#frame.reindex([&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;],method = &apos;bfill&apos;,columns=states) &#x62A5;&#x9519;
+</code></pre><h4 class="mume-header" id="%E4%B8%A2%E5%BC%83%E6%8C%87%E5%AE%9A%E8%BD%B4%E4%B8%8A%E7%9A%84%E5%80%BC">&#x4E22;&#x5F03;&#x6307;&#x5B9A;&#x8F74;&#x4E0A;&#x7684;&#x503C;</h4>
+
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;drop&#x65B9;&#x6CD5;&#x4E22;&#x5F03;&#x6307;&#x5B9A;&#x8F74;&#x4E0A;&#x7684;&#x503C;&#xFF0C;&#x4E0D;&#x4F1A;&#x5BF9;&#x539F;DataFrame&#x4EA7;&#x751F;&#x5F71;&#x54CD;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame = pd.DataFrame(np.arange(9).reshape((3,3)),index = [&apos;a&apos;,&apos;c&apos;,&apos;d&apos;],columns = [&apos;Ohio&apos;,&apos;Texas&apos;,&apos;California&apos;])
+frame.drop(&apos;a&apos;) 
+#&#x8F93;&#x51FA;
+Ohio    Texas   California
+a   0   1   2
+c   3   4   5
+d   6   7   8
+
+frame.drop([&apos;Ohio&apos;],axis=1)
+#&#x8F93;&#x51FA;
+    Texas   California
+a   1   2
+c   4   5
+d   7   8
+</code></pre><h4 class="mume-header" id="%E7%AE%97%E6%95%B0%E8%BF%90%E7%AE%97">&#x7B97;&#x6570;&#x8FD0;&#x7B97;</h4>
+
+<p>DataFrame&#x5728;&#x8FDB;&#x884C;&#x7B97;&#x672F;&#x8FD0;&#x7B97;&#x65F6;&#x4F1A;&#x8FDB;&#x884C;&#x8865;&#x9F50;&#xFF0C;&#x5728;&#x4E0D;&#x91CD;&#x53E0;&#x7684;&#x90E8;&#x5206;&#x8865;&#x8DB3;NA&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df1 = pd.DataFrame(np.arange(9).reshape((3,3)),columns=list(&apos;bcd&apos;),index=[&apos;Ohio&apos;,&apos;Texas&apos;,&apos;Colorado&apos;])
+df2 = pd.DataFrame(np.arange(12).reshape((4,3)),columns = list(&apos;bde&apos;),index=[&apos;Utah&apos;,&apos;Ohio&apos;,&apos;Texas&apos;,&apos;Oregon&apos;])
+df1 + df2
+#&#x8F93;&#x51FA;
+    b   c   d   e
+Colorado    NaN NaN NaN NaN
+Ohio    3.0 NaN 6.0 NaN
+Oregon  NaN NaN NaN NaN
+Texas   9.0 NaN 12.0    NaN
+Utah    NaN NaN NaN NaN
+</code></pre><p>&#x4F7F;&#x7528;fill_value&#x65B9;&#x6CD5;&#x586B;&#x5145;NA&#x6570;&#x636E;&#xFF0C;&#x4E0D;&#x8FC7;&#x4E24;&#x4E2A;df&#x4E2D;&#x90FD;&#x4E3A;NA&#x7684;&#x6570;&#x636E;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x4E0D;&#x4F1A;&#x586B;&#x5145;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df1.add(df2,fill_value=0)
+#&#x8F93;&#x51FA;
+    b   c   d   e
+Colorado    6.0 7.0 8.0 NaN
+Ohio    3.0 1.0 6.0 5.0
+Oregon  9.0 NaN 10.0    11.0
+Texas   9.0 4.0 12.0    8.0
+Utah    0.0 NaN 1.0 2.0
+</code></pre><h4 class="mume-header" id="%E5%87%BD%E6%95%B0%E7%9A%84%E5%BA%94%E7%94%A8%E5%92%8C%E6%98%A0%E5%B0%84">&#x51FD;&#x6570;&#x7684;&#x5E94;&#x7528;&#x548C;&#x6620;&#x5C04;</h4>
+
+<p>numpy&#x7684;&#x5143;&#x7D20;&#x7EA7;&#x6570;&#x7EC4;&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x64CD;&#x4F5C;Pandas&#x5BF9;&#x8C61;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame = pd.DataFrame(np.random.randn(3,3),columns=list(&apos;bcd&apos;),index=[&apos;Ohio&apos;,&apos;Texas&apos;,&apos;Colorado&apos;])
+np.abs(frame)
+#&#x8F93;&#x51FA;
+    b   c   d
+Ohio    0.367521    0.232387    0.649330
+Texas   3.115632    1.415106    2.093794
+Colorado    0.714983    1.420871    0.557722
+</code></pre><p>&#x53E6;&#x4E00;&#x4E2A;&#x5E38;&#x89C1;&#x7684;&#x64CD;&#x4F5C;&#x662F;&#xFF0C;&#x5C06;&#x51FD;&#x6570;&#x5E94;&#x7528;&#x5230;&#x7531;&#x5404;&#x5217;&#x6216;&#x884C;&#x6240;&#x5F62;&#x6210;&#x7684;&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#x4E0A;&#x3002;DataFrame&#x7684;apply&#x65B9;&#x6CD5;&#x5373;&#x53EF;&#x5B9E;&#x73B0;&#x6B64;&#x529F;&#x80FD;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>f = lambda x:x.max() - x.min()
+frame.apply(f)
+#&#x8F93;&#x51FA;
+b    3.830616
+c    2.835978
+d    2.743124
+dtype: float64
+
+frame.apply(f,axis=1)
+#&#x8F93;&#x51FA;
+Ohio        1.016851
+Texas       4.530739
+Colorado    2.135855
+dtype: float64
+
+def f(x):
+    return pd.Series([x.min(),x.max()],index=[&apos;min&apos;,&apos;max&apos;])
+frame.apply(f)
+#&#x8F93;&#x51FA;
+    b   c   d
+min -0.714983   -1.415106   -0.649330
+max 3.115632    1.420871    2.093794
+</code></pre><p>&#x5143;&#x7D20;&#x7EA7;&#x7684;Python&#x51FD;&#x6570;&#x4E5F;&#x662F;&#x53EF;&#x4EE5;&#x7528;&#x7684;,&#x4F7F;&#x7528;applymap&#x65B9;&#x6CD5;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>format = lambda x:&apos;%.2f&apos;%x
+frame.applymap(format)
+#&#x8F93;&#x51FA;
+b   c   d
+Ohio    0.37    -0.23   -0.65
+Texas   3.12    -1.42   2.09
+Colorado    -0.71   1.42    -0.56
+</code></pre><h4 class="mume-header" id="%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8E%92%E5%90%8D-1">&#x6392;&#x5E8F;&#x548C;&#x6392;&#x540D;</h4>
+
+<p>&#x5BF9;&#x4E8E;DataFrame,sort_index&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4EFB;&#x610F;&#x8F74;&#x7684;&#x7D22;&#x5F15;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x5347;&#x5E8F;&#x964D;&#x5E8F;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame = pd.DataFrame(np.arange(8).reshape((2,4)),index=[&apos;three&apos;,&apos;one&apos;],columns=[&apos;d&apos;,&apos;a&apos;,&apos;b&apos;,&apos;c&apos;])
+frame.sort_index()
+#&#x8F93;&#x51FA;
+    d   a   b   c
+one 4   5   6   7
+three   0   1   2   3
+
+frame.sort_index(1,ascending=False)
+#&#x8F93;&#x51FA;
+d  c  b  a
+three  0  3  2  1
+one    4  7  6  5
+</code></pre><p>DataFrame&#x4E5F;&#x53EF;&#x4EE5;&#x6309;&#x7167;&#x503C;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>#&#x6309;&#x7167;&#x4EFB;&#x610F;&#x4E00;&#x5217;&#x6216;&#x591A;&#x5217;&#x8FDB;&#x884C;&#x6392;&#x5E8F;
+frame.sort_values(by=[&apos;a&apos;,&apos;b&apos;])
+#&#x8F93;&#x51FA;
+    d   a   b   c
+three   0   1   2   3
+one 4   5   6   7
+</code></pre><h4 class="mume-header" id="%E6%B1%87%E6%80%BB%E5%92%8C%E8%AE%A1%E7%AE%97%E6%8F%8F%E8%BF%B0%E7%BB%9F%E8%AE%A1-1">&#x6C47;&#x603B;&#x548C;&#x8BA1;&#x7B97;&#x63CF;&#x8FF0;&#x7EDF;&#x8BA1;</h4>
+
+<p>DataFrame&#x4E2D;&#x7684;&#x5B9E;&#x73B0;&#x4E86;sum&#x3001;mean&#x3001;max&#x7B49;&#x65B9;&#x6CD5;,&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x8FDB;&#x884C;&#x6C47;&#x603B;&#x7EDF;&#x8BA1;&#x7684;&#x8F74;&#xFF0C;&#x540C;&#x65F6;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;describe&#x51FD;&#x6570;&#x67E5;&#x770B;&#x57FA;&#x672C;&#x6240;&#x6709;&#x7684;&#x7EDF;&#x8BA1;&#x9879;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df = pd.DataFrame([[1.4,np.nan],[7.1,-4.5],[np.nan,np.nan],[0.75,-1.3]],index=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;],columns=[&apos;one&apos;,&apos;two&apos;])
+df.sum(axis=1)
+#&#x8F93;&#x51FA;
+one    9.25
+two   -5.80
+dtype: float64
+
+#Na&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x6392;&#x9664;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;skipna&#x9009;&#x9879;&#x6765;&#x7981;&#x7528;&#x8BE5;&#x529F;&#x80FD;
+df.mean(axis=1,skipna=False)
+#&#x8F93;&#x51FA;
+a      NaN
+b    1.300
+c      NaN
+d   -0.275
+dtype: float64
+#idxmax&#x8FD4;&#x56DE;&#x95F4;&#x63A5;&#x7EDF;&#x8BA1;&#xFF0C;&#x662F;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x503C;&#x7684;&#x7D22;&#x5F15;
+
+df.idxmax()
+#&#x8F93;&#x51FA;
+one    b
+two    d
+dtype: object
+
+#describe&#x8FD4;&#x56DE;&#x7684;&#x662F;DataFrame&#x7684;&#x6C47;&#x603B;&#x7EDF;&#x8BA1;
+#&#x975E;&#x6570;&#x503C;&#x578B;&#x7684;&#x4E0E;&#x6570;&#x503C;&#x578B;&#x7684;&#x7EDF;&#x8BA1;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#x4E0D;&#x540C;
+df.describe()
+#&#x8F93;&#x51FA;
+one two
+count   3.000000    2.000000
+mean    3.083333    -2.900000
+std 3.493685    2.262742
+min 0.750000    -4.500000
+25% 1.075000    -3.700000
+50% 1.400000    -2.900000
+75% 4.250000    -2.100000
+max 7.100000    -1.300000
+</code></pre><p>DataFrame&#x4E5F;&#x5B9E;&#x73B0;&#x4E86;corr&#x548C;cov&#x65B9;&#x6CD5;&#x6765;&#x8BA1;&#x7B97;&#x4E00;&#x4E2A;DataFrame&#x7684;&#x76F8;&#x5173;&#x7CFB;&#x6570;&#x77E9;&#x9635;&#x548C;&#x534F;&#x65B9;&#x5DEE;&#x77E9;&#x9635;&#xFF0C;&#x540C;&#x65F6;DataFrame&#x4E5F;&#x53EF;&#x4EE5;&#x4E0E;Series&#x6C42;&#x89E3;&#x76F8;&#x5173;&#x7CFB;&#x6570;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame1 = pd.DataFrame(np.random.randn(3,3),index=list(&apos;abc&apos;),columns=list(&apos;abc&apos;))
+frame1.corr
+#&#x8F93;&#x51FA;
+&lt;bound method DataFrame.corr of           a         b         c
+a  1.253773  0.429059  1.535575
+b -0.113987 -2.837396 -0.894469
+c -0.548208  0.834003  0.994863&gt;
+
+frame1.cov()
+#&#x8F93;&#x51FA;
+a   b   c
+a   0.884409    0.357304    0.579613
+b   0.357304    4.052147    2.442527
+c   0.579613    2.442527    1.627843
+
+#corrwith&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x6BCF;&#x4E00;&#x5217;&#x4E0E;Series&#x7684;&#x76F8;&#x5173;&#x7CFB;&#x6570;
+frame1.corrwith(frame1[&apos;a&apos;])
+#&#x8F93;&#x51FA;
+a    1.000000
+b    0.188742
+c    0.483065
+dtype: float64
+</code></pre><h4 class="mume-header" id="%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E6%95%B0%E6%8D%AE-1">&#x5904;&#x7406;&#x7F3A;&#x5931;&#x6570;&#x636E;</h4>
+
+<p>Pandas&#x4E2D;&#x7F3A;&#x5931;&#x503C;&#x76F8;&#x5173;&#x7684;&#x65B9;&#x6CD5;&#x4E3B;&#x8981;&#x6709;&#x4EE5;&#x4E0B;&#x4E09;&#x4E2A;&#xFF1A;<br>
+isnull&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x5224;&#x65AD;&#x6570;&#x636E;&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#x6570;&#x636E;&#xFF1B;<br>
+fillna&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x586B;&#x8865;&#x7F3A;&#x5931;&#x6570;&#x636E;&#xFF1B;<br>
+dropna&#x65B9;&#x6CD5;&#x7528;&#x4E8E;&#x820D;&#x5F03;&#x7F3A;&#x5931;&#x6570;&#x636E;&#x3002;<br>
+&#x4E0A;&#x9762;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684;Series&#x6216;&#x8005;DataFrame&#xFF0C;&#x5BF9;&#x539F;&#x6570;&#x636E;&#x6CA1;&#x6709;&#x5F71;&#x54CD;,&#x5982;&#x679C;&#x60F3;&#x5728;&#x539F;&#x6570;&#x636E;&#x4E0A;&#x8FDB;&#x884C;&#x76F4;&#x63A5;&#x4FEE;&#x6539;&#xFF0C;&#x4F7F;&#x7528;inplace&#x53C2;&#x6570;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = pd.DataFrame([[1,6.5,3],[1,np.nan,np.nan],[np.nan,np.nan,np.nan],[np.nan,6.5,3]])
+data.dropna()
+#&#x8F93;&#x51FA;
+    0   1   2
+0   1.0 6.5 3.0
+</code></pre><p>&#x5BF9;DataFrame&#x6765;&#x8BF4;&#xFF0C;dropna&#x65B9;&#x6CD5;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x7F3A;&#x5931;&#x503C;&#xFF0C;&#x5C31;&#x4F1A;&#x8FDB;&#x884C;&#x6574;&#x884C;&#x5220;&#x9664;&#xFF0C;&#x4E0D;&#x8FC7;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x5220;&#x9664;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;how=all&#xFF0C;&#x662F;&#x5F53;&#x6574;&#x884C;&#x5168;&#x662F;na&#x7684;&#x65F6;&#x5019;&#x624D;&#x8FDB;&#x884C;&#x5220;&#x9664;,&#x540C;&#x65F6;&#x8FD8;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x5220;&#x9664;&#x7684;&#x8F74;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data.dropna(how=&apos;all&apos;,axis=1,inplace=True)
+data
+#&#x8F93;&#x51FA;
+0   1   2
+0   1.0 6.5 3.0
+1   1.0 NaN NaN
+2   NaN NaN NaN
+3   NaN 6.5 3.0
+</code></pre><p>DataFrame&#x586B;&#x5145;&#x7F3A;&#x5931;&#x503C;&#x53EF;&#x4EE5;&#x7EDF;&#x4E00;&#x586B;&#x5145;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x6309;&#x5217;&#x586B;&#x5145;&#xFF0C;&#x6216;&#x8005;&#x6307;&#x5B9A;&#x4E00;&#x79CD;&#x586B;&#x5145;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data.fillna({1:2,2:3})
+#&#x8F93;&#x51FA;
+0   1   2
+0   1.0 6.5 3.0
+1   1.0 2.0 3.0
+2   NaN 2.0 3.0
+3   NaN 6.5 3.0
+
+data.fillna(method=&apos;ffill&apos;)
+#&#x8F93;&#x51FA;
+0   1   2
+0   1.0 6.5 3.0
+1   1.0 6.5 3.0
+2   1.0 6.5 3.0
+3   1.0 6.5 3.0
+</code></pre><h4 class="mume-header" id="%E5%B1%82%E6%AC%A1%E5%8C%96%E7%B4%A2%E5%BC%95">&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;</h4>
+
+<p>&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;&#x662F;pandas&#x7684;&#x4E00;&#x9879;&#x91CD;&#x8981;&#x529F;&#x80FD;&#xFF0C;&#x5B83;&#x80FD;&#x4F7F;&#x4F60;&#x5728;&#x4E00;&#x4E2A;&#x8F74;&#x4E0A;&#x6709;&#x591A;&#x4E2A;&#x7D22;&#x5F15;&#x7EA7;&#x522B;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5B83;&#x80FD;&#x4F7F;&#x4F60;&#x4EE5;&#x4F4E;&#x7EF4;&#x5EA6;&#x5F62;&#x5F0F;&#x5904;&#x7406;&#x9AD8;&#x7EF4;&#x5EA6;&#x6570;&#x636E;&#xFF0C;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = pd.Series(np.random.randn(10),index=[[&apos;a&apos;,&apos;a&apos;,&apos;a&apos;,&apos;b&apos;,&apos;b&apos;,&apos;b&apos;,&apos;c&apos;,&apos;c&apos;,&apos;d&apos;,&apos;d&apos;],[1,2,3,1,2,3,1,2,2,3]])
+data
+
+#&#x8F93;&#x51FA;
+a  1    0.497970
+   2   -0.042377
+   3   -0.018719
+b  1    0.061412
+   2   -1.313888
+   3    0.751478
+c  1   -0.241329
+   2   -1.945047
+d  2    0.460786
+   3   -0.411931
+dtype: float64
+#&#x8F93;&#x51FA;
+MultiIndex([(&apos;a&apos;, 1),
+            (&apos;a&apos;, 2),
+            (&apos;a&apos;, 3),
+            (&apos;b&apos;, 1),
+            (&apos;b&apos;, 2),
+            (&apos;b&apos;, 3),
+            (&apos;c&apos;, 1),
+            (&apos;c&apos;, 2),
+            (&apos;d&apos;, 2),
+            (&apos;d&apos;, 3)],
+           )
+</code></pre><p>&#x8BBF;&#x95EE;&#x5206;&#x5757;&#x6570;&#x636E;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data[&apos;b&apos;]
+#&#x8F93;&#x51FA;
+1    0.061412
+2   -1.313888
+3    0.751478
+dtype: float64
+
+data[:,2]
+#&#x8F93;&#x51FA;
+a   -0.042377
+b   -1.313888
+c   -1.945047
+d    0.460786
+dtype: float64
+</code></pre><p>&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;&#x5728;&#x6570;&#x636E;&#x91CD;&#x5851;&#x548C;&#x57FA;&#x4E8E;&#x5206;&#x7EC4;&#x7684;&#x64CD;&#x4F5C;&#x4E2D;&#x626E;&#x6F14;&#x91CD;&#x8981;&#x7684;&#x89D2;&#x8272;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x4E0A;&#x9762;&#x7684;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;unstack&#x65B9;&#x6CD5;&#x91CD;&#x5851;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;DataFrame:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data.unstack()
+#&#x8F93;&#x51FA;
+1   2   3
+a   0.497970    -0.042377   -0.018719
+b   0.061412    -1.313888   0.751478
+c   -0.241329   -1.945047   NaN
+d   NaN 0.460786    -0.411931
+</code></pre><p>unstack&#x7684;&#x9006;&#x8FD0;&#x7B97;&#x662F;stack()</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data.unstack().stack()
+#&#x8F93;&#x51FA;
+a  1    0.497970
+   2   -0.042377
+   3   -0.018719
+b  1    0.061412
+   2   -1.313888
+   3    0.751478
+c  1   -0.241329
+   2   -1.945047
+d  2    0.460786
+   3   -0.411931
+dtype: float64
+</code></pre><p>DataFrame&#x7684;&#x884C;&#x5217;&#x7D22;&#x5F15;&#x90FD;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame = pd.DataFrame(np.arange(12).reshape((4,3)),index=[[&apos;a&apos;,&apos;a&apos;,&apos;b&apos;,&apos;b&apos;],[1,2,1,2]],columns=[[&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Colorado&apos;],[&apos;Green&apos;,&apos;Red&apos;,&apos;Green&apos;]])
+frame
+#&#x8F93;&#x51FA;
+    Ohio    Colorado
+Green   Red Green
+a   1   0   1   2
+2   3   4   5
+b   1   6   7   8
+2   9   10  11
+</code></pre><p>&#x521B;&#x5EFA;&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;MulitIndex&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>index = pd.MultiIndex.from_arrays([[&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Colorado&apos;],[&apos;Green&apos;,&apos;Red&apos;,&apos;Green&apos;]],names=[&apos;state&apos;,&apos;color&apos;])
+index
+#&#x8F93;&#x51FA;
+MultiIndex(levels=[[&apos;Colorado&apos;, &apos;Ohio&apos;], [&apos;Green&apos;, &apos;Red&apos;]],
+           labels=[[1, 1, 0], [0, 1, 0]],
+           names=[&apos;state&apos;, &apos;color&apos;])
+
+frame.columns=index
+frame
+#&#x8F93;&#x51FA;
+state   Ohio    Colorado
+color   Green   Red Green
+a   1   0   1   2
+    2   3   4   5
+b   1   6   7   8
+    2   9   10  11
+</code></pre><p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7ED9;&#x6211;&#x4EEC;&#x7684;&#x7D22;&#x5F15;&#x8D4B;&#x4E88;&#x540D;&#x5B57;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame.index.names=[&apos;key1&apos;,&apos;key2&apos;]
+frame
+#&#x8F93;&#x51FA;
+state   Ohio    Colorado
+color   Green   Red Green
+key1    key2            
+a   1   0   1   2
+2   3   4   5
+b   1   6   7   8
+2   9   10  11
+</code></pre><p>&#x4F7F;&#x7528;&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;&#x65F6;&#xFF0C;sort_index&#x4E2D;&#x7684;level&#x6307;&#x5B9A;&#x4E86;&#x6839;&#x636E;&#x54EA;&#x4E2A;&#x7D22;&#x5F15;&#x7EA7;&#x522B;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;sum&#x7B49;&#x6C47;&#x603B;&#x7EDF;&#x8BA1;&#x51FD;&#x6570;&#x4E2D;&#x7684;level&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x4E86;&#x6839;&#x636E;&#x54EA;&#x4E2A;&#x7D22;&#x5F15;&#x7EA7;&#x522B;&#x8FDB;&#x884C;&#x6C47;&#x603B;&#x7EDF;&#x8BA1;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>frame.sort_index(level = 0)
+frame.sum(level=&apos;key2&apos;)
+frame.sum(level=&apos;color&apos;,axis=1)
+
+</code></pre><h1 class="mume-header" id="%E4%BA%8C-%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">&#x4E8C;&#x3001;&#x5E38;&#x7528;&#x65B9;&#x6CD5;</h1>
+
+<h2 class="mume-header" id="1%E5%90%88%E5%B9%B6%E6%95%B0%E6%8D%AE%E9%9B%86">1.&#x5408;&#x5E76;&#x6570;&#x636E;&#x96C6;</h2>
+
+<h3 class="mume-header" id="11%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A3%8E%E6%A0%BC%E5%90%88%E5%B9%B6">1.1&#x6570;&#x636E;&#x5E93;&#x98CE;&#x683C;&#x5408;&#x5E76;</h3>
+
+<p>&#x6570;&#x636E;&#x5E93;&#x98CE;&#x683C;&#x7684;&#x5408;&#x5E76;&#x6307;&#x6839;&#x636E;&#x7D22;&#x5F15;&#x6216;&#x67D0;&#x4E00;&#x5217;&#x7684;&#x503C;&#x662F;&#x5426;&#x76F8;&#x7B49;&#x8FDB;&#x884C;&#x5408;&#x5E76;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5728;pandas&#x4E2D;&#xFF0C;&#x8FD9;&#x79CD;&#x5408;&#x5E76;&#x4F7F;&#x7528;merge&#x4EE5;&#x53CA;join&#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x3002;<br>
+&#x5148;&#x6765;&#x770B;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df1 = pd.DataFrame({&apos;key&apos;:[&apos;b&apos;,&apos;b&apos;,&apos;a&apos;,&apos;c&apos;,&apos;a&apos;,&apos;a&apos;,&apos;b&apos;],&apos;data1&apos;:range(7)})
+df2 = pd.DataFrame({&apos;key&apos;:[&apos;a&apos;,&apos;b&apos;,&apos;d&apos;],&apos;data2&apos;:range(3)})
+pd.merge(df1,df2)
+#&#x8F93;&#x51FA;
+  key  data1  data2
+0   b      0      1
+1   b      1      1
+2   b      6      1
+3   a      2      0
+4   a      4      0
+5   a      5      0
+
+</code></pre><p>&#x5982;&#x679C;merge&#x51FD;&#x6570;&#x53EA;&#x6307;&#x5B9A;&#x4E86;&#x4E24;&#x4E2A;DataFrame&#xFF0C;&#x5B83;&#x4F1A;&#x81EA;&#x52A8;&#x641C;&#x7D22;&#x4E24;&#x4E2A;DataFrame&#x4E2D;&#x76F8;&#x540C;&#x7684;&#x5217;&#x7D22;&#x5F15;&#xFF0C;&#x5373;key&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x53EF;&#x4EE5;&#x8FDB;&#x884C;&#x6307;&#x5B9A;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x8BED;&#x53E5;&#x548C;&#x4E0A;&#x9762;&#x662F;&#x7B49;&#x4EF7;&#x7684;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>pd.merge(df1,df2,on=&apos;key&apos;)
+</code></pre><p>&#x5F53;&#x4E24;&#x4E2A;DataFrame&#x6CA1;&#x6709;&#x76F8;&#x540C;&#x7684;&#x5217;&#x7D22;&#x5F15;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x94FE;&#x63A5;&#x7684;&#x5217;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>#&#x5982;&#x679C;&#x4E24;&#x4E2A;DataFrame&#x7684;&#x5217;&#x540D;&#x4E0D;&#x540C;&#xFF0C;&#x53EF;&#x4EE5;&#x5206;&#x522B;&#x6307;&#x5B9A;
+df3 = pd.DataFrame({&apos;lkey&apos;:[&apos;b&apos;,&apos;b&apos;,&apos;a&apos;,&apos;c&apos;,&apos;a&apos;,&apos;a&apos;,&apos;b&apos;],&apos;data1&apos;:range(7)})
+df4 = pd.DataFrame({&apos;rkey&apos;:[&apos;a&apos;,&apos;b&apos;,&apos;d&apos;],&apos;data2&apos;:range(3)})
+pd.merge(df3,df4,left_on=&apos;lkey&apos;,right_on=&apos;rkey&apos;)
+
+#&#x8F93;&#x51FA;
+  lkey  data1 rkey  data2
+0    b      0    b      1
+1    b      1    b      1
+2    b      6    b      1
+3    a      2    a      0
+4    a      4    a      0
+5    a      5    a      0
+
+</code></pre><p>merge&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x91C7;&#x7528;&#x7684;&#x662F;&#x5185;&#x94FE;&#x63A5;&#x65B9;&#x5F0F;&#xFF0C;&#x5F53;&#x7136;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;how&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x94FE;&#x63A5;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>pd.merge(df1,df2,how=&apos;outer&apos;)
+
+#&#x8F93;&#x51FA;
+  key  data1  data2
+0   b    0.0    1.0
+1   b    1.0    1.0
+2   b    6.0    1.0
+3   a    2.0    0.0
+4   a    4.0    0.0
+5   a    5.0    0.0
+6   c    3.0    NaN
+7   d    NaN    2.0
+
+</code></pre><p>&#x6839;&#x636E;&#x591A;&#x4E2A;&#x952E;&#x8FDB;&#x884C;&#x5408;&#x5E76;&#xFF0C;&#x4F20;&#x5165;&#x4E00;&#x7EC4;&#x7531;&#x5217;&#x540D;&#x7EC4;&#x6210;&#x7684;&#x5217;&#x8868;&#x5373;&#x53EF;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>left = pd.DataFrame({&apos;key1&apos;:[&apos;foo&apos;,&apos;foo&apos;,&apos;bar&apos;],&apos;key2&apos;:[&apos;one&apos;,&apos;two&apos;,&apos;one&apos;],&apos;lval&apos;:[1,2,3]})
+right = pd.DataFrame({&apos;key1&apos;:[&apos;foo&apos;,&apos;foo&apos;,&apos;bar&apos;,&apos;bar&apos;],&apos;key2&apos;:[&apos;one&apos;,&apos;one&apos;,&apos;one&apos;,&apos;two&apos;],&apos;rval&apos;:[4,5,6,7]})
+pd.merge(left,right,on=[&apos;key1&apos;,&apos;key2&apos;],how=&apos;outer&apos;)
+
+#&#x8F93;&#x51FA;
+  key1 key2  lval  rval
+0  foo  one   1.0   4.0
+1  foo  one   1.0   5.0
+2  foo  two   2.0   NaN
+3  bar  one   3.0   6.0
+4  bar  two   NaN   7.0
+
+</code></pre><p>&#x4E0A;&#x9762;&#x4E24;&#x4E2A;&#x8868;&#x6709;&#x4E24;&#x5217;&#x91CD;&#x590D;&#x7684;&#x5217;&#xFF0C;&#x5982;&#x679C;&#x53EA;&#x6839;&#x636E;&#x4E00;&#x5217;&#x8FDB;&#x884C;&#x5408;&#x5E76;&#xFF0C;&#x5219;&#x4F1A;&#x591A;&#x51FA;&#x4E00;&#x5217;&#x91CD;&#x590D;&#x5217;&#xFF0C;&#x91CD;&#x590D;&#x5217;&#x540D;&#x7684;&#x5904;&#x7406;&#x6211;&#x4EEC;&#x4E00;&#x822C;&#x4F7F;&#x7528;merge&#x7684;suffixes&#x5C5E;&#x6027;,&#x53EF;&#x4EE5;&#x5E2E;&#x6211;&#x4EEC;&#x6307;&#x5B9A;&#x91CD;&#x590D;&#x5217;&#x5408;&#x5E76;&#x540E;&#x7684;&#x5217;&#x540D;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>pd.merge(left,right,on=&apos;key1&apos;,suffixes=(&apos;_left&apos;,&apos;_right&apos;))
+#&#x8F93;&#x51FA;
+  key1 key2_left  lval key2_right  rval
+0  foo       one     1        one     4
+1  foo       one     1        one     5
+2  foo       two     2        one     4
+3  foo       two     2        one     5
+4  bar       one     3        one     6
+5  bar       one     3        two     7
+</code></pre><p>&#x5BF9;&#x4E8E;&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x6211;&#x4EEC;&#x5FC5;&#x987B;&#x4EE5;&#x5217;&#x8868;&#x7684;&#x5F62;&#x5F0F;&#x6307;&#x660E;&#x7528;&#x4F5C;&#x5408;&#x5E76;&#x952E;&#x7684;&#x591A;&#x4E2A;&#x5217;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>lefth = pd.DataFrame({&apos;key1&apos;:[&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Nevada&apos;,&apos;Nevada&apos;],
+                     &apos;key2&apos;:[2000,2001,2002,2001,2002],
+                     &apos;data&apos;:np.arange(5.0)})
+righth = pd.DataFrame(np.arange(12).reshape((6,2)),
+                      index=[[&apos;Nevada&apos;,&apos;Nevada&apos;,&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Ohio&apos;,&apos;Ohio&apos;],[2001,2000,2000,2000,2001,2002]],
+                     columns=[&apos;event1&apos;,&apos;event2&apos;])
+pd.merge(lefth,righth,left_on=[&apos;key1&apos;,&apos;key2&apos;],right_index=True)
+
+#&#x8F93;&#x51FA;
+     key1  key2  data  event1  event2
+0    Ohio  2000   0.0       4       5
+0    Ohio  2000   0.0       6       7
+1    Ohio  2001   1.0       8       9
+2    Ohio  2002   2.0      10      11
+3  Nevada  2001   3.0       0       1
+</code></pre><p>&#x5982;&#x679C;&#x5355;&#x7EAF;&#x60F3;&#x6839;&#x636E;&#x7D22;&#x5F15;&#x8FDB;&#x884C;&#x5408;&#x5E76;&#xFF0C;&#x4F7F;&#x7528;join&#x65B9;&#x6CD5;&#x4F1A;&#x66F4;&#x52A0;&#x7B80;&#x5355;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>left2 = pd.DataFrame([[1.0,2.0],[3.0,4.0],[5.0,6.0]],index = [&apos;a&apos;,&apos;c&apos;,&apos;e&apos;],columns=[&apos;Ohio&apos;,&apos;Nevada&apos;])
+right2 = pd.DataFrame([[7.0,8.0],[9.0,10.0],[11.0,12.0],[13.0,14.0]],index = [&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;],columns=[&apos;Missouri&apos;,&apos;Alabama&apos;])
+left2.join(right2,how=&apos;outer&apos;)
+#&#x8F93;&#x51FA;
+
+   Ohio  Nevada  Missouri  Alabama
+a   1.0     2.0       NaN      NaN
+b   NaN     NaN       7.0      8.0
+c   3.0     4.0       9.0     10.0
+d   NaN     NaN      11.0     12.0
+e   5.0     6.0      13.0     14.0
+
+</code></pre><h3 class="mume-header" id="12%E8%BD%B4%E5%90%91%E9%93%BE%E6%8E%A5">1.2&#x8F74;&#x5411;&#x94FE;&#x63A5;</h3>
+
+<p>pandas&#x7684;&#x8F74;&#x5411;&#x94FE;&#x63A5;&#x6307;&#x7684;&#x662F;&#x6839;&#x636E;&#x67D0;&#x4E00;&#x4E2A;&#x8F74;&#x5411;&#x6765;&#x62FC;&#x63A5;&#x6570;&#x636E;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;&#x5217;&#x8868;&#x7684;&#x5408;&#x5E76;&#x3002;concat&#x51FD;&#x6570;,&#x9ED8;&#x8BA4;&#x5728;&#x8F74;0&#x4E0A;&#x5DE5;&#x4F5C;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x770B;&#x4E00;&#x4E2A;Series&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>s1 = pd.Series([0,1],index=[&apos;a&apos;,&apos;b&apos;])
+s2 = pd.Series([2,3,4],index=[&apos;c&apos;,&apos;d&apos;,&apos;e&apos;])
+s3 = pd.Series([5,6],index=[&apos;f&apos;,&apos;g&apos;])
+pd.concat([s1,s2,s3])
+
+#&#x8F93;&#x51FA;
+a    0
+b    1
+c    2
+d    3
+e    4
+f    5
+g    6
+dtype: int64
+
+pd.concat([s1,s2,s3],axis=1)
+
+#&#x8F93;&#x51FA;
+    0   1   2
+a   0.0 NaN NaN
+b   1.0 NaN NaN
+c   NaN 2.0 NaN
+d   NaN 3.0 NaN
+e   NaN 4.0 NaN
+f   NaN NaN 5.0
+g   NaN NaN 6.0
+</code></pre><p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x53C2;&#x4E0E;&#x8FDE;&#x63A5;&#x7684;&#x7247;&#x6BB5;&#x5728;&#x7ED3;&#x679C;&#x4E2D;&#x533A;&#x5206;&#x4E0D;&#x5F00;&#xFF0C;&#x5047;&#x8BBE;&#x4F60;&#x60F3;&#x8981;&#x5728;&#x8FDE;&#x63A5;&#x8F74;&#x4E0A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5C42;&#x6B21;&#x5316;&#x7D22;&#x5F15;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x989D;&#x4F7F;&#x7528;keys&#x53C2;&#x6570;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>result = pd.concat([s1,s1,s3],keys=[&apos;one&apos;,&apos;two&apos;,&apos;three&apos;])
+result
+
+#&#x8F93;&#x51FA;
+one    a    0
+      b    1
+two    a    0
+      b    1
+three  f    5
+      g    6
+dtype: int64
+</code></pre><p>&#x5982;&#x679C;&#x662F;&#x6CBF;&#x7740;axis=1&#x8FDB;&#x884C;&#x8F74;&#x5411;&#x5408;&#x5E76;&#xFF0C;keys&#x4F1A;&#x53D8;&#x4E3A;&#x5217;&#x7D22;&#x5F15;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>pd.concat([s1,s1,s3],keys=[&apos;one&apos;,&apos;two&apos;,&apos;three&apos;],axis=1)
+
+#&#x8F93;&#x51FA;
+   one  two  three
+a  0.0  NaN    NaN
+b  1.0  NaN    NaN
+c  NaN  2.0    NaN
+d  NaN  3.0    NaN
+e  NaN  4.0    NaN
+f  NaN  NaN    5.0
+g  NaN  NaN    6.0
+
+</code></pre><p>&#x4E0A;&#x9762;&#x7684;&#x903B;&#x8F91;&#x540C;&#x6837;&#x9002;&#x7528;&#x4E8E;DataFrame&#x7684;&#x8F74;&#x5411;&#x5408;&#x5E76;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df1 = pd.DataFrame(np.arange(6).reshape((3,2)),index=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;],columns=[&apos;one&apos;,&apos;two&apos;])
+df2 = pd.DataFrame(5 + np.arange(4).reshape((2,2)),index=[&apos;a&apos;,&apos;c&apos;],columns=[&apos;three&apos;,&apos;four&apos;])
+
+pd.concat([df1,df2],axis=1,keys=[&apos;level1&apos;,&apos;level2&apos;])
+
+#&#x4E0B;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#x4F1A;&#x5F97;&#x5230;&#x4E0E;&#x4E0A;&#x9762;&#x540C;&#x6837;&#x7684;&#x6548;&#x679C;
+pd.concat({&quot;level1&quot;:df1,&apos;level2&apos;:df2},axis=1)
+
+#&#x8F93;&#x51FA;
+  level1     level2     
+     one two  three four
+a      0   1    5.0  6.0
+b      2   3    NaN  NaN
+c      4   5    7.0  8.0
+
+</code></pre><p>&#x4F7F;&#x7528;ignore_index&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x4E0D;&#x4FDD;&#x7559;&#x8F74;&#x4E0A;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x4EA7;&#x751F;&#x4E00;&#x7EC4;&#x65B0;&#x7684;&#x7D22;&#x5F15;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df1 = pd.DataFrame(np.arange(6).reshape((3,2)),index=[1,2,3],columns=[&apos;one&apos;,&apos;two&apos;])
+df2 = pd.DataFrame(5 + np.arange(4).reshape((2,2)),index=[1,2],columns=[&apos;three&apos;,&apos;four&apos;])
+pd.concat([df1,df2],ignore_index = True)
+
+#&#x8F93;&#x51FA;
+   four  one  three  two
+0   NaN  0.0    NaN  1.0
+1   NaN  2.0    NaN  3.0
+2   NaN  4.0    NaN  5.0
+3   6.0  NaN    5.0  NaN
+4   8.0  NaN    7.0  NaN
+
+</code></pre><h2 class="mume-header" id="2%E9%87%8D%E5%A1%91%E5%92%8C%E8%BD%B4%E5%90%91%E6%97%8B%E8%BD%AC">2.&#x91CD;&#x5851;&#x548C;&#x8F74;&#x5411;&#x65CB;&#x8F6C;</h2>
+
+<p>&#x5728;&#x91CD;&#x5851;&#x548C;&#x8F74;&#x5411;&#x65CB;&#x8F6C;&#x4E2D;&#xFF0C;&#x6709;&#x4E24;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x4E8C;&#x8005;&#x4E92;&#x4E3A;&#x9006;&#x64CD;&#x4F5C;&#xFF1A;<br>
+stack:&#x5C06;&#x6570;&#x636E;&#x7684;&#x5217;&#x65CB;&#x8F6C;&#x4E3A;&#x884C;<br>
+unstack:&#x5C06;&#x6570;&#x636E;&#x7684;&#x884C;&#x65CB;&#x8F6C;&#x4E3A;&#x5217;<br>
+&#x5148;&#x6765;&#x770B;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = pd.DataFrame(np.arange(6).reshape((2,3)),index=pd.Index([&apos;Ohio&apos;,&apos;Colorado&apos;],name=&apos;state&apos;),
+                    columns=pd.Index([&apos;one&apos;,&apos;two&apos;,&apos;three&apos;],name=&apos;number&apos;))
+result = data.stack()
+result
+
+#&#x8F93;&#x51FA;&#x4E3A;
+state     number
+Ohio      one       0
+          two       1
+          three     2
+Colorado  one       3
+          two       4
+          three     5
+dtype: int64
+
+</code></pre><p>&#x6211;&#x4EEC;&#x4F7F;&#x7528;unstack()&#x5C06;&#x6570;&#x636E;&#x7684;&#x5217;&#x65CB;&#x8F6C;&#x4E3A;&#x884C;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;&#x6700;&#x91CC;&#x5C42;&#x7684;&#x884C;&#x7D22;&#x5F15;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>result.unstack()
+
+#&#x8F93;&#x51FA;&#x4E3A;
+number    one  two  three
+state                    
+Ohio        0    1      2
+Colorado    3    4      5
+
+</code></pre><p>&#x9ED8;&#x8BA4;unstack&#x662F;&#x5C06;&#x6700;&#x91CC;&#x5C42;&#x7684;&#x884C;&#x7D22;&#x5F15;&#x65CB;&#x8F6C;&#x4E3A;&#x5217;&#x7D22;&#x5F15;&#xFF0C;&#x4E0D;&#x8FC7;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;unstack&#x7684;&#x5C42;&#x7EA7;,unstack&#x4E4B;&#x540E;&#x4F5C;&#x4E3A;&#x65CB;&#x8F6C;&#x8F74;&#x7684;&#x7EA7;&#x522B;&#x5C06;&#x4F1A;&#x6210;&#x4E3A;&#x7ED3;&#x679C;&#x4E2D;&#x7684;&#x6700;&#x4F4E;&#x7EA7;&#x522B;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x540D;&#x5B57;&#x6307;&#x5B9A;&#x8981;&#x65CB;&#x8F6C;&#x7684;&#x7D22;&#x5F15;,&#x4E0B;&#x9762;&#x4E24;&#x53E5;&#x4EE3;&#x7801;&#x662F;&#x7B49;&#x4EF7;&#x7684;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>result.unstack(0)
+result.unstack(&apos;state&apos;)
+
+#&#x8F93;&#x51FA;&#x4E3A;
+state   Ohio  Colorado
+number                
+one        0         3
+two        1         4
+three      2         5
+</code></pre><p>&#x5982;&#x679C;&#x4E0D;&#x662F;&#x6240;&#x6709;&#x7684;&#x7EA7;&#x522B;&#x90FD;&#x80FD;&#x5728;&#x5206;&#x7EC4;&#x4E2D;&#x627E;&#x5230;&#x7684;&#x8BDD;&#xFF0C;unstack&#x64CD;&#x4F5C;&#x53EF;&#x80FD;&#x4F1A;&#x4EA7;&#x751F;&#x7F3A;&#x5931;&#x6570;&#x636E;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>s1 = pd.Series([0,1,2,3],index=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;])
+s2 = pd.Series([4,5,6],index=[&apos;c&apos;,&apos;d&apos;,&apos;e&apos;])
+data2 = pd.concat([s1,s2],keys=[&apos;one&apos;,&apos;two&apos;])
+data2.unstack()
+
+#&#x8F93;&#x51FA;
+       a    b    c    d    e
+one  0.0  1.0  2.0  3.0  NaN
+two  NaN  NaN  4.0  5.0  6.0
+
+</code></pre><p>stack&#x64CD;&#x4F5C;&#x9ED8;&#x8BA4;&#x4F1A;&#x8FC7;&#x6EE4;&#x6389;&#x7F3A;&#x5931;&#x503C;&#xFF0C;&#x4E0D;&#x8FC7;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;dropna&#x53C2;&#x6570;&#x9009;&#x62E9;&#x4E0D;&#x8FC7;&#x6EE4;&#x7F3A;&#x5931;&#x503C;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data2.unstack().stack()
+#&#x8F93;&#x51FA;
+one  a    0.0
+     b    1.0
+     c    2.0
+     d    3.0
+two  c    4.0
+     d    5.0
+     e    6.0
+dtype: float64
+
+data2.unstack().stack(dropna=False)
+#&#x8F93;&#x51FA;
+one  a    0.0
+     b    1.0
+     c    2.0
+     d    3.0
+     e    NaN
+two  a    NaN
+     b    NaN
+     c    4.0
+     d    5.0
+     e    6.0
+dtype: float64
+</code></pre><h2 class="mume-header" id="3%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2">3.&#x6570;&#x636E;&#x8F6C;&#x6362;</h2>
+
+<h3 class="mume-header" id="31%E7%A7%BB%E9%99%A4%E9%87%8D%E5%A4%8D%E6%95%B0%E6%8D%AE">3.1&#x79FB;&#x9664;&#x91CD;&#x590D;&#x6570;&#x636E;</h3>
+
+<p>&#x79FB;&#x9664;&#x91CD;&#x590D;&#x6570;&#x636E;&#xFF0C;&#x4F7F;&#x7528;drop_duplicates&#x65B9;&#x6CD5;,&#x8BE5;&#x65B9;&#x6CD5;&#x9ED8;&#x8BA4;&#x5224;&#x65AD;&#x5168;&#x90E8;&#x5217;,&#x4E0D;&#x8FC7;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x6307;&#x5B9A;&#x5217;&#x8FDB;&#x884C;&#x53BB;&#x91CD;.</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = pd.DataFrame({&apos;k1&apos;:[&apos;one&apos;]*3 + [&apos;two&apos;] * 4,&apos;k2&apos;:[1,1,2,3,3,4,4]})
+data.drop_duplicates()
+#&#x8F93;&#x51FA;
+    k1  k2
+0  one   1
+2  one   2
+3  two   3
+5  two   4
+
+data.drop_duplicates([&apos;k2&apos;])
+#&#x8F93;&#x51FA;
+    k1  k2
+0   one 1
+2   one 2
+3   two 3
+5   two 4
+</code></pre><p>&#x9ED8;&#x8BA4;&#x5BF9;&#x4E8E;&#x91CD;&#x590D;&#x6570;&#x636E;,&#x7CFB;&#x7EDF;&#x4F1A;&#x4FDD;&#x7559;&#x7B2C;&#x4E00;&#x9879;&#xFF0C;&#x5373;keep&#x53C2;&#x6570;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A;first&#xFF0C;&#x4E0D;&#x8FC7;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x4FDD;&#x7559;&#x6700;&#x540E;&#x4E00;&#x9879;&#xFF0C;&#x53EA;&#x9700;&#x5C06;keep&#x53C2;&#x6570;&#x8BBE;&#x7F6E;&#x4E3A;last&#x5373;&#x53EF;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data.drop_duplicates([&apos;k2&apos;],keep=&apos;last&apos;)
+#&#x8F93;&#x51FA;
+    k1  k2
+1   one 1
+2   one 2
+4   two 3
+6   two 4
+
+</code></pre><h3 class="mume-header" id="32map%E5%87%BD%E6%95%B0">3.2map&#x51FD;&#x6570;</h3>
+
+<p>&#x5728;&#x5BF9;&#x6570;&#x636E;&#x96C6;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#x65F6;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x5E0C;&#x671B;&#x6839;&#x636E;&#x6570;&#x7EC4;&#x3001;Series&#x6216;&#x8005;DataFrame&#x5217;&#x4E2D;&#x7684;&#x503C;&#x6765;&#x5B9E;&#x73B0;&#x8BE5;&#x8F6C;&#x6362;&#x5DE5;&#x4F5C;&#xFF0C;&#x6211;&#x4EEC;&#x6765;&#x770B;&#x770B;&#x4E0B;&#x9762;&#x7684;&#x8089;&#x7C7B;&#x6570;&#x636E;&#x7684;&#x5904;&#x7406;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = pd.DataFrame({&apos;food&apos;:[&apos;bacon&apos;,&apos;pulled pork&apos;,&apos;bacon&apos;,
+                             &apos;Pastrami&apos;,&apos;corned beef&apos;,&apos;Bacon&apos;,&apos;pastrami&apos;,&apos;honey ham&apos;,&apos;nova lox&apos;],
+                    &apos;ounces&apos;:[4,3,12,6,7.5,8,3,5,6]})
+meat_to_animal = {
+    &apos;bacon&apos;:&apos;pig&apos;,
+    &apos;pulled pork&apos;:&apos;pig&apos;,
+    &apos;pastrami&apos;:&apos;cow&apos;,
+    &apos;corned beef&apos;:&apos;cow&apos;,
+    &apos;honey ham&apos;:&apos;pig&apos;,
+    &apos;nova lox&apos;:&apos;salmon&apos;
+}
+#Series&#x7684;map&#x65B9;&#x6CD5;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6216;&#x542B;&#x6709;&#x6620;&#x5C04;&#x5173;&#x7CFB;&#x7684;&#x5B57;&#x5178;&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x76F8;&#x5E94;&#x7684;&#x8F6C;&#x6362;
+data[&apos;animal&apos;]=data[&apos;food&apos;].map(str.lower).map(meat_to_animal)
+data
+
+#&#x8F93;&#x51FA;
+          food  ounces  animal
+0        bacon     4.0     pig
+1  pulled pork     3.0     pig
+2        bacon    12.0     pig
+3     Pastrami     6.0     cow
+4  corned beef     7.5     cow
+5        Bacon     8.0     pig
+6     pastrami     3.0     cow
+7    honey ham     5.0     pig
+8     nova lox     6.0  salmon
+
+</code></pre><p>&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x662F;&#x7B49;&#x4EF7;&#x7684;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data[&apos;animal&apos;] = data[&apos;food&apos;].map(lambda x: meat_to_animal[x.lower()])
+</code></pre><h3 class="mume-header" id="33replace%E5%80%BC%E6%9B%BF%E6%8D%A2">3.3replace&#x503C;&#x66FF;&#x6362;</h3>
+
+<p>&#x4F7F;&#x7528;replace&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x503C;&#x66FF;&#x6362;,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x5982;&#x679C;&#x5E0C;&#x671B;&#x5BF9;&#x4E0D;&#x540C;&#x7684;&#x503C;&#x8FDB;&#x884C;&#x4E0D;&#x540C;&#x7684;&#x66FF;&#x6362;&#xFF0C;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x7531;&#x66FF;&#x6362;&#x5173;&#x7CFB;&#x7EC4;&#x6210;&#x7684;&#x5217;&#x8868;&#x6216;&#x8005;&#x5B57;&#x5178;&#x5373;&#x53EF;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = pd.Series([1,-999,2,-999,-1000,3])
+data.replace(-999,np.nan)
+#&#x8F93;&#x51FA;
+0       1.0
+1       NaN
+2       2.0
+3       NaN
+4   -1000.0
+5       3.0
+dtype: float64
+
+data.replace([-999,-1000],[np.nan,0])
+#&#x8F93;&#x51FA;
+0    1.0
+1    NaN
+2    2.0
+3    NaN
+4    0.0
+5    3.0
+dtype: float64
+</code></pre><h3 class="mume-header" id="34%E7%A6%BB%E6%95%A3%E5%8C%96%E5%92%8C%E9%9D%A2%E5%85%83%E5%88%92%E5%88%86">3.4&#x79BB;&#x6563;&#x5316;&#x548C;&#x9762;&#x5143;&#x5212;&#x5206;</h3>
+
+<p>&#x6839;&#x636E;&#x533A;&#x95F4;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5212;&#x5206;&#xFF0C;&#x4F7F;&#x7528;cut&#x51FD;&#x6570;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x4EEC;&#x60F3;&#x6839;&#x636E;&#x5E74;&#x9F84;&#x533A;&#x95F4;&#x5BF9;&#x4EBA;&#x7FA4;&#x8FDB;&#x884C;&#x5212;&#x5206;&#xFF0C;&#x4ECE;&#x800C;&#x5F97;&#x5230;&#x4E0D;&#x540C;&#x5E74;&#x9F84;&#x6BB5;&#x7684;&#x4EBA;&#x6570;&#x7EDF;&#x8BA1;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>ages = [20,22,25,27,21,23,37,31,61,45,41,32]
+bins = [18,25,35,60,100]
+cats = pd.cut(ages,bins)
+cats
+#&#x8F93;&#x51FA;
+[(18, 25], (18, 25], (18, 25], (25, 35], (18, 25], ..., (25, 35], (60, 100], (35, 60], (35, 60], (25, 35]]
+Length: 12
+Categories (4, interval[int64]): [(18, 25] &lt; (25, 35] &lt; (35, 60] &lt; (60, 100]]
+</code></pre><p>cut&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;Categorical&#x5BF9;&#x8C61;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;codes&#x6765;&#x67E5;&#x770B;&#x4E2A;&#x6570;&#x636E;&#x7684;&#x7EC4;&#x522B;&#x7F16;&#x53F7;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>cats.codes
+#&#x8F93;&#x51FA;
+array([0, 0, 0, 1, 0, 0, 2, 1, 3, 2, 2, 1], dtype=int8)
+</code></pre><p>&#x4F7F;&#x7528;value_counts&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5206;&#x7EC4;&#x8BA1;&#x6570;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>pd.value_counts(cats)
+#&#x8F93;&#x51FA;
+(18, 25]     5
+(35, 60]     3
+(25, 35]     3
+(60, 100]    1
+dtype: int64
+</code></pre><p>&#x4E0A;&#x9762;&#x662F;&#x524D;&#x5F00;&#x540E;&#x95ED;&#x533A;&#x95F4;&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x8981;&#x53D8;&#x4E3A;&#x524D;&#x95ED;&#x540E;&#x5F00;&#x533A;&#x95F4;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x8BBE;&#x7F6E;right=False&#x53C2;&#x6570;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>cats = pd.cut(ages,bins,right=False)
+pd.value_counts(cats)
+#&#x8F93;&#x51FA;
+[25, 35)     4
+[18, 25)     4
+[35, 60)     3
+[60, 100)    1
+dtype: int64
+</code></pre><p>&#x4E5F;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x81EA;&#x5DF1;&#x7684;&#x9762;&#x5143;&#x540D;&#x79F0;&#xFF0C;&#x5C06;labels&#x9009;&#x9879;&#x8BBE;&#x4E3A;&#x4E00;&#x4E2A;&#x5217;&#x8868;&#x6216;&#x8005;&#x6570;&#x7EC4;&#x5373;&#x53EF;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>group_names = [&apos;Youth&apos;,&apos;YoungAdult&apos;,&apos;MiddleAged&apos;,&apos;Senior&apos;]
+pd.cut(ages,bins,labels=group_names)
+#&#x8F93;&#x51FA;
+[Youth, Youth, Youth, YoungAdult, Youth, ..., YoungAdult, Senior, MiddleAged, MiddleAged, YoungAdult]
+Length: 12
+Categories (4, object): [MiddleAged &lt; Senior &lt; YoungAdult &lt; Youth]
+</code></pre><p>&#x5982;&#x679C;&#x5411;cut&#x4F20;&#x5165;&#x7684;&#x4E0D;&#x662F;&#x9762;&#x5143;&#x8FB9;&#x754C;&#x800C;&#x662F;&#x9762;&#x5143;&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x5219;&#x4F1A;&#x6839;&#x636E;&#x6570;&#x636E;&#x7684;&#x6700;&#x5927;&#x503C;&#x548C;&#x6700;&#x5C0F;&#x503C;&#x81EA;&#x52A8;&#x8BA1;&#x7B97;&#x7B49;&#x957F;&#x9762;&#x5143;&#xFF0C;&#x6BD4;&#x5982;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x5C06;&#x5747;&#x5300;&#x5206;&#x5E03;&#x7684;&#x6570;&#x636E;&#x5206;&#x4E3A;&#x56DB;&#x7EC4;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = np.random.rand(20)
+pd.cut(data,4,precision=2)
+</code></pre><p>pandas&#x8FD8;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5212;&#x5206;&#x7684;&#x51FD;&#x6570;&#xFF1A;qcut&#x3002;qcut&#x57FA;&#x4E8E;&#x6837;&#x672C;&#x5206;&#x4F4D;&#x6570;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x9762;&#x5143;&#x5212;&#x5206;&#xFF0C;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x5206;&#x4F4D;&#x6570;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F20;&#x5165;&#x4E00;&#x4E2A;&#x6570;&#x91CF;&#xFF08;&#x4F1A;&#x81EA;&#x52A8;&#x8BA1;&#x7B97;&#x5206;&#x4F4D;&#x6570;&#xFF09;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>data = np.random.randn(1000)
+cats = pd.qcut(data,4)
+pd.value_counts(cats)
+
+#&#x8F93;&#x51FA;
+(0.701, 3.451]     250
+(0.0727, 0.701]    250
+(-0.57, 0.0727]    250
+(-3.84, -0.57]     250
+dtype: int64
+
+pd.value_counts(pd.qcut(data,[0,0.1,0.5,0.9,1]))
+#&#x8F93;&#x51FA;
+(0.0727, 1.338]     400
+(-1.247, 0.0727]    400
+(1.338, 3.451]      100
+(-3.84, -1.247]     100
+dtype: int64
+</code></pre><h3 class="mume-header" id="35%E6%8E%92%E5%88%97%E5%92%8C%E9%9A%8F%E6%9C%BA%E9%87%87%E6%A0%B7">3.5&#x6392;&#x5217;&#x548C;&#x968F;&#x673A;&#x91C7;&#x6837;</h3>
+
+<p>&#x5229;&#x7528;numpy.random.permutation&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x8F7B;&#x677E;&#x5B9E;&#x73B0;&#x5BF9;Series&#x6216;&#x8005;DataFrame&#x7684;&#x5217;&#x7684;&#x6392;&#x5217;&#x5DE5;&#x4F5C;&#xFF0C;&#x901A;&#x8FC7;&#x9700;&#x8981;&#x6392;&#x5217;&#x7684;&#x8F74;&#x7684;&#x957F;&#x5EA6;&#x8C03;&#x7528;permutation&#xFF0C;&#x53EF;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x8868;&#x793A;&#x65B0;&#x987A;&#x5E8F;&#x7684;&#x6574;&#x6570;&#x6570;&#x7EC4;,&#x6700;&#x540E;&#x4F7F;&#x7528;pandas&#x7684;take&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x5927;&#x5C0F;&#x7684;&#x6570;&#x636E;&#x5373;&#x53EF;&#x5B9E;&#x73B0;&#x91C7;&#x6837;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df = pd.DataFrame(np.arange(5*4).reshape(5,4))
+sampler = np.random.permutation(5)
+df.take(sampler[:3])
+
+#&#x8F93;&#x51FA;
+    0   1   2   3
+2   8   9  10  11
+4  16  17  18  19
+3  12  13  14  15
+</code></pre><h2 class="mume-header" id="4%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88">4.&#x6570;&#x636E;&#x805A;&#x5408;</h2>
+
+<h3 class="mume-header" id="41%E6%95%B0%E6%8D%AE%E5%88%86%E7%BB%84">4.1&#x6570;&#x636E;&#x5206;&#x7EC4;</h3>
+
+<p>pandas&#x4E2D;&#x7684;&#x6570;&#x636E;&#x5206;&#x7EC4;&#x4F7F;&#x7528;groupby&#x65B9;&#x6CD5;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4E00;&#x4E2A;GroupBy&#x5BF9;&#x8C61;&#xFF0C;&#x5BF9;&#x5206;&#x7EC4;&#x4E4B;&#x540E;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x805A;&#x5408;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x805A;&#x5408;&#xFF0C;&#x6BD4;&#x5982;&#x6C42;&#x5E73;&#x5747;&#x503C;mean&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df = pd.DataFrame({
+    &apos;key1&apos; :[&apos;a&apos;,&apos;a&apos;,&apos;b&apos;,&apos;b&apos;,&apos;a&apos;],
+    &apos;key2&apos;:[&apos;one&apos;,&apos;two&apos;,&apos;one&apos;,&apos;two&apos;,&apos;one&apos;],
+    &apos;data1&apos;:np.random.randn(5),
+    &apos;data2&apos;:np.random.randn(5)
+})
+groupd = df[&apos;data1&apos;].groupby(df[&apos;key1&apos;])
+groupd
+#&lt;pandas.core.groupby.SeriesGroupBy object at 0x118814dd8&gt;
+groupd.mean()
+
+#&#x8F93;&#x51FA;
+key1
+a    0.697500
+b   -0.068161
+Name: data1, dtype: float64
+</code></pre><p>&#x4E0A;&#x9762;&#x662F;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#x7684;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x591A;&#x79CD;&#x6570;&#x636E;&#x683C;&#x5F0F;&#x8FDB;&#x884C;&#x6570;&#x636E;&#x5206;&#x7EC4;&#xFF0C;&#x4E0B;&#x9762;&#x5C31;&#x4E00;&#x4E00;&#x6574;&#x7406;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<h4 class="mume-header" id="series">Series</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>means = df[&apos;data1&apos;].groupby([df[&apos;key1&apos;],df[&apos;key2&apos;]]).mean()
+means
+#&#x8F93;&#x51FA;
+key1  key2
+a     one     0.543936
+      two     1.004630
+b     one     0.219453
+      two    -0.355776
+Name: data1, dtype: float64
+</code></pre><h4 class="mume-header" id="%E5%90%88%E9%80%82%E9%95%BF%E5%BA%A6%E7%9A%84%E6%95%B0%E7%BB%84">&#x5408;&#x9002;&#x957F;&#x5EA6;&#x7684;&#x6570;&#x7EC4;</h4>
+
+<p>&#x5206;&#x7EC4;&#x952E;&#x53EF;&#x4EE5;&#x662F;&#x4EFB;&#x4F55;&#x9002;&#x5F53;&#x957F;&#x5EA6;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x6570;&#x7EC4;&#x4E2D;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x503C;&#x4EE3;&#x8868;&#x76F8;&#x5E94;&#x4E0B;&#x6807;&#x7684;&#x8BB0;&#x5F55;&#x7684;&#x5206;&#x7EC4;&#x952E;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>states = np.array([&apos;Ohio&apos;,&apos;Nevada&apos;,&apos;Nevada&apos;,&apos;Ohio&apos;,&apos;Ohio&apos;])
+years = np.array([2005,2005,2006,2005,2006])
+df[&apos;data1&apos;].groupby([states,years]).mean()
+
+#&#x8F93;&#x51FA;
+Nevada  2005   -0.076147
+        2006    1.919477
+Ohio    2005   -1.391949
+        2006    0.047971
+Name: data1, dtype: float64
+
+</code></pre><h4 class="mume-header" id="%E5%88%97%E5%90%8D">&#x5217;&#x540D;</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>df.groupby(&apos;key1&apos;).mean()
+
+#&#x8F93;&#x51FA;
+         data1     data2
+key1                    
+a    -0.422537 -0.253973
+b     0.187507 -1.288918
+
+</code></pre><pre data-role="codeBlock" data-info class="language-"><code>df.groupby([&apos;key1&apos;,&apos;key2&apos;]).mean()
+
+#&#x8F93;&#x51FA;
+
+              data1     data2
+key1 key2                    
+a    one  -0.595733 -0.390545
+     two  -0.076147  0.019171
+b    one   1.919477 -2.880140
+     two  -1.544463  0.302303
+
+</code></pre><h4 class="mume-header" id="map">map</h4>
+
+<pre data-role="codeBlock" data-info class="language-"><code>#&#x6211;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x6839;&#x636E;map&#x6765;&#x8FDB;&#x884C;&#x5206;&#x7EC4;
+people = pd.DataFrame(np.random.randn(5,5),columns=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;],index=[&apos;Joe&apos;,&apos;Steve&apos;,&apos;Wes&apos;,&apos;Jim&apos;,&apos;Travis&apos;])
+mapping = {&apos;a&apos;:&apos;red&apos;,&apos;b&apos;:&apos;red&apos;,&apos;c&apos;:&apos;blue&apos;,&apos;d&apos;:&apos;blue&apos;,&apos;e&apos;:&apos;red&apos;,&apos;f&apos;:&apos;orange&apos;}
+people.groupby(mapping,axis=1).sum()
+
+#&#x8F93;&#x51FA;
+
+            blue       red
+Joe    -0.344590 -1.300556
+Steve  -1.528426  0.291562
+Wes     1.586020 -2.301132
+Jim     3.577655  0.991981
+Travis -0.019483 -1.717456
+
+</code></pre><h3 class="mume-header" id="42%E6%95%B0%E6%8D%AE%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C">4.2&#x6570;&#x636E;&#x805A;&#x5408;&#x64CD;&#x4F5C;</h3>
+
+<h4 class="mume-header" id="%E7%89%B9%E5%AE%9A%E8%81%9A%E5%90%88%E6%93%8D%E4%BD%9C">&#x7279;&#x5B9A;&#x805A;&#x5408;&#x64CD;&#x4F5C;</h4>
+
+<p>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x50CF;&#x4E4B;&#x524D;&#x4E00;&#x6837;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x7279;&#x5B9A;&#x7684;&#x805A;&#x5408;&#x51FD;&#x6570;&#xFF0C;&#x6BD4;&#x5982;sum&#xFF0C;mean&#x7B49;&#x7B49;&#xFF0C;&#x4F46;&#x662F;&#x540C;&#x65F6;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x805A;&#x5408;&#x51FD;&#x6570;&#xFF0C;&#x53EA;&#x9700;&#x5C06;&#x5176;&#x4F20;&#x5165;agg&#x65B9;&#x6CD5;&#x4E2D;&#x5373;&#x53EF;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>df = pd.DataFrame({
+    &apos;key1&apos; :[&apos;a&apos;,&apos;a&apos;,&apos;b&apos;,&apos;b&apos;,&apos;a&apos;],
+    &apos;key2&apos;:[&apos;one&apos;,&apos;two&apos;,&apos;one&apos;,&apos;two&apos;,&apos;one&apos;],
+    &apos;data1&apos;:np.random.randn(5),
+    &apos;data2&apos;:np.random.randn(5)
+})
+def peak_to_peak(arr):
+    return arr.max()-arr.min()
+grouped = df.groupby(&apos;key1&apos;)
+grouped.agg(peak_to_peak)
+
+#&#x8F93;&#x51FA;
+         data1     data2
+key1                    
+a     1.640537  0.922057
+b     0.631830  0.149891
+
+</code></pre><h4 class="mume-header" id="transform%E5%87%BD%E6%95%B0">transform&#x51FD;&#x6570;</h4>
+
+<p>transform&#x4F1A;&#x5C06;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x8FD0;&#x7528;&#x5230;&#x5404;&#x4E2A;&#x5206;&#x7EC4;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x7ED3;&#x679C;&#x653E;&#x7F6E;&#x5230;&#x9002;&#x5F53;&#x7684;&#x4F4D;&#x7F6E;&#x4E0A;&#x3002;&#x5982;&#x679C;&#x4E2A;&#x5206;&#x7EC4;&#x4EA7;&#x751F;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x6807;&#x91CF;&#x503C;&#xFF0C;&#x5219;&#x8BE5;&#x503C;&#x5C06;&#x4F1A;&#x88AB;&#x5E7F;&#x64AD;&#x51FA;&#x53BB;,&#x5982;&#x679C;&#x5206;&#x7EC4;&#x4EA7;&#x751F;&#x7684;&#x662F;&#x4E00;&#x4E2A;&#x76F8;&#x540C;&#x5927;&#x5C0F;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x5219;&#x4F1A;&#x6839;&#x636E;&#x4E0B;&#x6807;&#x653E;&#x7F6E;&#x5230;&#x9002;&#x5F53;&#x7684;&#x4F4D;&#x7F6E;&#x4E0A;&#x3002;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>people = pd.DataFrame(np.random.randn(5,5),columns=[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;,&apos;e&apos;],index=[&apos;Joe&apos;,&apos;Steve&apos;,&apos;Wes&apos;,&apos;Jim&apos;,&apos;Travis&apos;])
+key = [&apos;one&apos;,&apos;two&apos;,&apos;one&apos;,&apos;two&apos;,&apos;one&apos;]
+people.groupby(key).transform(np.mean)
+
+#&#x8F93;&#x51FA;
+               a         b         c         d         e
+Joe     0.021084  0.495692 -0.034315 -0.644370  0.016868
+Steve  -0.391918  0.711868  0.346912 -0.175392 -0.084987
+Wes     0.021084  0.495692 -0.034315 -0.644370  0.016868
+Jim    -0.391918  0.711868  0.346912 -0.175392 -0.084987
+Travis  0.021084  0.495692 -0.034315 -0.644370  0.016868
+
+</code></pre><p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;&#x5206;&#x7EC4;&#x4EA7;&#x751F;&#x4E86;&#x4E00;&#x4E2A;&#x6807;&#x91CF;&#xFF0C;&#x5373;&#x5206;&#x7EC4;&#x7684;&#x5E73;&#x5747;&#x503C;&#xFF0C;&#x7136;&#x540E;transform&#x5C06;&#x8FD9;&#x4E2A;&#x503C;&#x6620;&#x5C04;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x4F4D;&#x7F6E;&#x4E0A;&#xFF0C;&#x73B0;&#x5728;DataFrame&#x4E2D;&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x4E0A;&#x7684;&#x6570;&#x636E;&#x90FD;&#x662F;&#x5BF9;&#x5E94;&#x7EC4;&#x522B;&#x7684;&#x5E73;&#x5747;&#x503C;&#x3002;&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x5E0C;&#x671B;&#x4ECE;&#x5404;&#x7EC4;&#x4E2D;&#x51CF;&#x53BB;&#x5E73;&#x5747;&#x503C;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x4E0B;&#x9762;&#x7684;&#x65B9;&#x6CD5;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>               a         b         c         d         e
+Joe     1.088338  0.651514 -0.375819 -0.763599  0.382158
+Steve  -0.852075  0.146425  0.852557 -1.380961 -0.186821
+Wes    -0.606404  0.029827 -0.607516 -1.010777 -0.221357
+Jim     0.852075 -0.146425 -0.852557  1.380961  0.186821
+Travis -0.481934 -0.681341  0.983335  1.774376 -0.160801
+
+</code></pre><h3 class="mume-header" id="43%E6%95%B0%E6%8D%AE%E9%80%8F%E8%A7%86%E8%A1%A8">4.3&#x6570;&#x636E;&#x900F;&#x89C6;&#x8868;</h3>
+
+<p>&#x900F;&#x89C6;&#x8868;&#x662F;&#x5404;&#x79CD;&#x7535;&#x5B50;&#x8868;&#x683C;&#x7A0B;&#x5E8F;&#x548C;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x5206;&#x6790;&#x8F6F;&#x4EF6;&#x4E2D;&#x4E00;&#x79CD;&#x5E38;&#x89C1;&#x7684;&#x6570;&#x636E;&#x6C47;&#x603B;&#x5DE5;&#x5177;&#xFF0C;&#x5B83;&#x6839;&#x636E;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x952E;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x805A;&#x5408;&#xFF0C;&#x5E76;&#x6839;&#x636E;&#x884C;&#x548C;&#x5217;&#x4F24;&#x7684;&#x5206;&#x7EC4;&#x952E;&#x5C06;&#x6570;&#x636E;&#x5206;&#x914D;&#x5230;&#x5404;&#x4E2A;&#x77E9;&#x5F62;&#x533A;&#x57DF;&#x4E2D;&#x3002;<br>
+&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x5C0F;&#x8D39;&#x6570;&#x636E;&#xFF08;&#x4E0B;&#x8F7D;&#x5730;&#x5740;&#xFF1A;<a href="http://pan.baidu.com/s/1bpGW3Av">http://pan.baidu.com/s/1bpGW3Av</a> &#x5BC6;&#x7801;:2p9v&#xFF09;&#xFF0C;&#x6211;&#x4EEC;&#x8BFB;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x8BA1;&#x7B97;&#x5C0F;&#x8D39;&#x7387;&#x4E00;&#x5217;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>#&#x5BFC;&#x5165;&#x5C0F;&#x8D39;&#x6570;&#x636E;
+tips=pd.read_csv(&apos;./aid1907/month03/pandas/tips.csv&apos;)
+tips[&apos;tip_pct&apos;]=tips[&apos;tip&apos;]/tips[&apos;total_bill&apos;]
+tips.head()
+
+#&#x8F93;&#x51FA;
+
+   total_bill   tip     sex smoker  day    time  size   tip_pct
+0       16.99  1.01  Female     No  Sun  Dinner     2  0.059447
+1       10.34  1.66    Male     No  Sun  Dinner     3  0.160542
+2       21.01  3.50    Male     No  Sun  Dinner     3  0.166587
+3       23.68  3.31    Male     No  Sun  Dinner     2  0.139780
+4       24.59  3.61  Female     No  Sun  Dinner     4  0.146808
+
+</code></pre><p>&#x8003;&#x8651;&#x6211;&#x4EEC;&#x7684;&#x5C0F;&#x8D39;&#x6570;&#x636E;&#x96C6;&#xFF0C;&#x6211;&#x4EEC;&#x60F3;&#x805A;&#x5408;tip_pct&#x548C;size&#xFF0C;&#x60F3;&#x6839;&#x636E;day&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#xFF0C;&#x5C06;smoker&#x653E;&#x5230;&#x5217;&#x4E0A;&#xFF0C;&#x5C06;day&#x653E;&#x5230;&#x884C;&#x4E0A;&#xFF1A;</p>
+<pre data-role="codeBlock" data-info class="language-"><code>tips.pivot_table([&apos;tip_pct&apos;,&apos;size&apos;],index=[&apos;sex&apos;,&apos;day&apos;],columns=&apos;smoker&apos;)
+
+#&#x8F93;&#x51FA;
+                 size             tip_pct          
+smoker             No       Yes        No       Yes
+sex    day                                         
+Female Fri   2.500000  2.000000  0.165296  0.209129
+       Sat   2.307692  2.200000  0.147993  0.163817
+       Sun   3.071429  2.500000  0.165710  0.237075
+       Thur  2.480000  2.428571  0.155971  0.163073
+Male   Fri   2.000000  2.125000  0.138005  0.144730
+       Sat   2.656250  2.629630  0.162132  0.139067
+       Sun   2.883721  2.600000  0.158291  0.173964
+       Thur  2.500000  2.300000  0.165706  0.164417
+
+</code></pre><p>&#x5982;&#x679C;&#x60F3;&#x589E;&#x52A0;&#x6C47;&#x603B;&#x7EDF;&#x8BA1;&#x5217;&#xFF0C;&#x53EF;&#x4EE5;&#x589E;&#x52A0;margins=True&#x53C2;&#x6570;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>tips.pivot_table([&apos;tip_pct&apos;,&apos;size&apos;],index=[&apos;sex&apos;,&apos;day&apos;],columns=&apos;smoker&apos;,margins=True)
+
+#&#x8F93;&#x51FA;
+
+                 size            ...   tip_pct          
+smoker             No       Yes  ...       Yes       All
+sex    day                       ...                    
+Female Fri   2.500000  2.000000  ...  0.209129  0.199388
+       Sat   2.307692  2.200000  ...  0.163817  0.156470
+       Sun   3.071429  2.500000  ...  0.237075  0.181569
+       Thur  2.480000  2.428571  ...  0.163073  0.157525
+Male   Fri   2.000000  2.125000  ...  0.144730  0.143385
+       Sat   2.656250  2.629630  ...  0.139067  0.151577
+       Sun   2.883721  2.600000  ...  0.173964  0.162344
+       Thur  2.500000  2.300000  ...  0.164417  0.165276
+All          2.668874  2.408602  ...  0.163196  0.160803
+
+[9 rows x 6 columns]
+
+</code></pre><p>&#x5982;&#x679C;&#x60F3;&#x4F7F;&#x7528;&#x5176;&#x4ED6;&#x805A;&#x5408;&#x51FD;&#x6570;&#xFF0C;&#x5C06;&#x5176;&#x4F20;&#x5165;aggfunc&#x5373;&#x53EF;&#xFF0C;&#x4F8B;&#x5982;&#x4F7F;&#x7528;count&#x6216;len&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x6709;&#x5173;&#x5206;&#x7EC4;&#x5927;&#x5C0F;&#x7684;&#x4EA4;&#x53C9;&#x8868;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>tips.pivot_table(&apos;tip_pct&apos;,index=[&apos;sex&apos;,&apos;smoker&apos;],columns=&apos;day&apos;,aggfunc=len,margins=True)
+
+#&#x8F93;&#x51FA;
+day             Fri   Sat   Sun  Thur    All
+sex    smoker                               
+Female No       2.0  13.0  14.0  25.0   54.0
+       Yes      7.0  15.0   4.0   7.0   33.0
+Male   No       2.0  32.0  43.0  20.0   97.0
+       Yes      8.0  27.0  15.0  10.0   60.0
+All            19.0  87.0  76.0  62.0  244.0
+
+</code></pre><p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;fill_value&#x586B;&#x5145;&#x7F3A;&#x5931;&#x503C;:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>tips.pivot_table(&apos;size&apos;,index=[&apos;time&apos;,&apos;sex&apos;,&apos;smoker&apos;],columns=&apos;day&apos;,aggfunc=sum,fill_value=0)
+
+#&#x8F93;&#x51FA;
+
+day                    Fri   Sat    Sun  Thur
+time   sex    smoker                         
+Dinner Female No       2.0  30.0   43.0   2.0
+              Yes      8.0  33.0   10.0   NaN
+       Male   No       4.0  85.0  124.0   NaN
+              Yes     12.0  71.0   39.0   NaN
+Lunch  Female No       3.0   NaN    NaN  60.0
+              Yes      6.0   NaN    NaN  17.0
+       Male   No       NaN   NaN    NaN  50.0
+              Yes      5.0   NaN    NaN  23.0
+
+</code></pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
